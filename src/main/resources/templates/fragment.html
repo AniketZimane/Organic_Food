@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/admin_assest/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="/admin_assest/fonts/fontawesome-all.min.css">
+
+</head>
+<body>
+<div th:fragment="adminfragment">
+  <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
+    <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="/review/">Add Review</a></li>
+          <li class="nav-item"><a class="nav-link" href="/product/">Add Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="/scheme/">Add Schemes</a></li>
+          <li class="nav-item"><a class="nav-link" href="/blog/">Add Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/feature/">Add Features</a></li>
+          <li class="nav-item">
+<!--              <a class="nav-link" href="Admin_Login.html">Report</a><br>-->
+              <div style="position: relative; display: inline-block; border-radius: 20px; overflow: hidden; border: 2px solid #ccc;">
+                  <select style="padding: 10px; width: 100px; border: none; outline: none; background: transparent;" onchange="window.location.href=this.value;">
+                      <option style="padding: 10px; border-radius: 20px;" value="0" selected>Report</option>
+                      <option style="padding: 10px; border-radius: 20px;" value="/admin/product/report/">Product Report</option>
+                  </select>
+                  <div style="content: '\25BC'; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></div>
+              </div>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/login/">Login sign up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+</body>
+<script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
+<script src="/admin_assest/js/theme.js"></script>
+</html>

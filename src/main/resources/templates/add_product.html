@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>About us - Brand</title>
+    <link rel="stylesheet" href="/admin_assest/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <link rel="stylesheet" href="/admin_assest/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/admin_assest/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/admin_assest/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/admin_assest/css/Bootstrap-4---Payment-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/FORM.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Form-Basic-icons.css">
+    <link rel="stylesheet" href="/admin_assest/css/Ludens---Create-Edit-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/Pretty-Login-Form-.css">
+
+    <script src="/assets/js/sweetalert.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/bg.jpg');">
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">konkan most favorite brand</span><span class="site-heading-lower">sindhukonkan</span></h1>
+    <div th:replace="fragment.html ::adminfragment"></div>
+    <section class="page-section about-heading">
+        <div class="container">
+            <div style="color: rgb(133,135,150);height: 600px;">
+                <p class="text-center" style="font-family: 'Abril Fatface', serif;font-size: 40px;color: var(--bs-gray);">ADD PRODUCT</p>
+                <form method="post" action="/add/product/" th:object="${Product}" enctype="multipart/form-data" class="shadow align-content-center form-topborder" style="text-align: left;background: #ffffff;padding: 20px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;">
+                            <label class="form-label fw-bold">Select Product Id*</label>
+                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}">
+                                <option selected disabled>Select Product Id</option>
+                                <option th:value="${data?.id}" th:text="${data?.id}">---------</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;"><label class="form-label fw-bold">Select Product Category*</label><select class="form-select" name="category" required>
+                                <option value="undefined" selected="" disabled=''>Select Category</option>
+                                <option value="1">Vegitable</option>
+                                <option value="2">Fruits</option>
+                                <option value="2">Grossary</option>
+                            </select></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Name*</label><input class="form-control" th:value="${data?.name}" type="text" name="name" placeholder="Product Name" required></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Title*</label><input class="form-control" th:value="${data?.title}" type="text" name="title" placeholder="Product Title" required></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;">
+                            <label class="form-label fw-bold">Manufacturing Date*</label>
+                            <input class="form-control" th:value="${data?.mnf_date}" type="date" id="mnf_date" name="mnf_date" required>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;">
+                            <label class="form-label fw-bold">Expiry Date*</label>
+                            <input class="form-control" th:value="${data?.exp_date}" type="date" id="exp_date" name="exp_date" required>
+                            <span id="expiry-error" style="color: red;"></span>
+                        </div>
+
+                        <script>
+                            const manufacturingDateInput = document.getElementById('mnf_date');
+                            const expiryDateInput = document.getElementById('exp_date');
+                            const expiryError = document.getElementById('expiry-error');
+
+                            expiryDateInput.addEventListener('change', function() {
+                                const manufacturingDate = new Date(manufacturingDateInput.value);
+                                const expiryDate = new Date(expiryDateInput.value);
+
+                                if (expiryDate <= manufacturingDate) {
+                                    expiryError.textContent = 'Expiry date must be greater than manufacturing date';
+                                    expiryDateInput.value = ''; // Clear the expiry date input
+                                } else {
+                                    expiryError.textContent = ''; // Clear the error message if expiry date is valid
+                                }
+                            });
+                        </script>
+
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Select Unit*</label><select class="form-select" th:value="${data?.unit}" name="unit" required>
+                                <option value="0" selected="">Select Product Unit</option>
+                                <option value="kgs">Kgs</option>
+                                <option value="nos">Nos</option>
+                            </select></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Discount</label>
+                            <div class="form-check"><input id="radio_y" class="form-check-input" type="radio" th:value="${data?.discount_YN}" value="1" name="discount_YN" onclick="toggleTextBox()"><label class="form-check-label" for="formCheck-2">Yes</label></div>
+                            <div class="form-check"><input id="radio_n" class="form-check-input" type="radio" th:value="${data?.discount_YN}" value="0" name="discount_YN" onclick="toggleTextBox()" checked><label class="form-check-label" for="formCheck-3">No</label></div>
+                        </div>
+                        <script>
+                            function toggleTextBox() {
+                                var textBox = document.getElementById("discount_field");
+
+                                var yesRadio = document.getElementById("radio_y");
+                                console.log(yesRadio)
+
+                                if (yesRadio.checked) {
+                                    textBox.disabled = false;
+                                    textBox.classList.add("required");
+                                    document.getElementById('discount_field').value = '0';
+                                } else {
+                                    textBox.disabled = true;
+<!--                                    textBox.classList.remove("required");-->
+                                    document.getElementById('discount_field').value = '0';
+                                }
+                            }
+                        </script>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Per Unit Prize *</label><input class="form-control" type="text" placeholder="Enter Per Unit Prize" th:value="${data?.prize}" name="prize" required></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Discount %*</label><input class="form-control" type="text" placeholder="Enter Value In Percentage" id="discount_field" th:value="${data?.discount}" name="discount" disabled></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Total Stock</label><input class="form-control" type="number" placeholder="0" th:value="${data?.stock}" name="stock" required></div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Product Photo</label><input class="form-control" type="file" required="" name="file" th:value="${data?.extension}" accept="image/*"></div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info Of Product</label><textarea class="form-control" placeholder="Product Details" th:value="${data?.brief_info}" name="brief_info" required></textarea>
+                            <hr class="my-4">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;">
+                            <div class="row">
+                                <div class="col-sm-8 col-xl-10">
+                                    <h3 class="fw-bold">Producer Details</h3>
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-xl-2 justify-content-center"><button class="btn btn-primary btn-sm-guinda mx-1" type="button"><i class="fa fa-minus"></i></button><button class="btn btn-primary btn-sm-guinda" type="button"><i class="fa fa-plus"></i></button></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Name:</label><input class="form-control" type="text" th:value="${data?.prod_name}" name="prod_name" placeholder="Farmer Name"></div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Address:</label><input class="form-control" type="text" th:value="${data?.prod_add}" name="prod_add" placeholder="Farmer Address"></div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="number"  th:value="${data?.prod_mob_number}" name="prod_mob_number" placeholder="Mobile Number"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="submit"><i class="fa fa-save mx-3"></i>Save</button><button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="button"><i class="fas fa-broom mx-3"></i>Clear</button><button class="btn btn-primary col-xl-12 mt-2 btn-cancelar col-sm-12 col-12" type="button"><i class="fas fa-edit mx-3" style="font-size: 17px;"></i>Update</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div style="color: rgb(133,135,150);height: 600px;"></div>
+        </div>
+    </section>
+    <footer class="text-center footer text-faded py-5"></footer>
+    <script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin_assest/js/bs-init.js"></script>
+    <script src="/admin_assest/js/Bootstrap-4---Payment-Form-script.js"></script>
+    <script src="/admin_assest/js/current-day.js"></script>
+</body>
+
+</html>

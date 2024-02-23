@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Store - Brand</title>
+    <link rel="stylesheet" href="/admin_assest/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <link rel="stylesheet" href="/admin_assest/css/aos.min.css">
+    <link rel="stylesheet" href="/admin_assest/css/Bootstrap-4---Payment-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/Company-Invoice.css">
+    <link rel="stylesheet" href="/admin_assest/css/FORM.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Form-Basic-icons.css">
+    <link rel="stylesheet" href="/admin_assest/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="/admin_assest/css/Ludens---Create-Edit-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/admin_assest/css/select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/user_assest/js/sweetalert.js"></script>
+</head>
+
+<body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/bg.jpg');">
+<script th:inline="javascript">
+       var msg=[[${msg}]]
+       var emsg=[[${emsg}]]
+       if(msg!=null)
+       {
+               swal("Good job!", msg, "success");
+        }
+        if(emsg!=null)
+        {
+               swal("Opps!", emsg, "info");
+
+        }
+</script>
+<h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">Konkan most favorite brand</span><span class="site-heading-lower">SindhuKonkan</span></h1>
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="text-center cta-inner rounded">
+                        <h2 class="section-heading mb-5"><span class="section-heading-upper">Sinhdu Konkan</span><span class="section-heading-lower">The Organic Food Brand</span></h2>
+                        <div class="d-flex flex-column justify-content-center" id="login-box">
+                            <div class="login-box-header">
+                                <h4 style="color: rgb(139,139,139);margin-bottom: 0px;font-weight: 400;font-size: 27px;">Login</h4>
+                            </div>
+                            <div class="login-box-content">
+                                <div class="fb-login box-shadow"></div>
+                                <div class="gp-login box-shadow"></div>
+                            </div>
+                            <form method="post" action="/login/">
+                                <div class="email-login" style="background-color: #ffffff;"><input type="email" class="email-imput form-control" style="margin-top: 10px;" required="" placeholder="Email" minlength="6" name="email">
+                                    <input type="password" class="password-input form-control" style="margin-top: 10px;" required="" name="password" placeholder="Password" minlength="6"></div>
+                                <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;">
+                                    <button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember" style="cursor: pointer;" name="check"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#" data-bs-target="#modal-2" data-bs-toggle="modal">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
+                                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#" data-bs-target="#modal-1" data-bs-toggle="modal">Sign Up!</a></p>
+                            </div>
+                        </div>
+                        <ul class="list-unstyled text-start mx-auto list-hours mb-5"></ul>
+                        <p class="address mb-5"><em></em></p>
+                        <p class="address mb-0"><small></small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section about-heading">
+        <div class="container">
+            <div class="about-heading-content"></div>
+        </div>
+    </section>
+    <footer class="text-center footer text-faded py-5"></footer>
+        <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Registration&nbsp;</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form data-aos="fade" class="custom-form" method="post" action="/new/user/registration/" th:object="${Registration}">
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter User Name" required="" name="username"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="email" placeholder="Official Email" required="" name="email"></div>
+
+                            <div class="field">
+                                <label class="form-label mb-0" for="float-input">Select User Type</label>
+                                <select class="form-select" name="userType" id="userTypeSelect">
+                                    <option value="13" selected="">Select User</option>
+                                    <option value="0">User</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Farmer</option>
+                                </select>
+                                <br>
+                            </div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter T-Code" minlength="4" maxlength="4" required="" name="tCode" id="tCodeInput"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter Farmer Id" minlength="4" maxlength="4" required="" name="farmerId" id="farmerIdInput"></div>
+                            <!--                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter OTP" minlength="4" maxlength="4" required=""></div>-->
+                            <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Password" minlength="8" name="password" maxlength="15" required=""></div>
+                            <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Re-Password" required=""></div>
+                            <button class="btn btn-success d-block submit-button w-100" type="submit">Submit Form</button>
+                        </form>
+
+                        <script>
+                                document.getElementById("userTypeSelect").addEventListener("change", function() {
+                                    var userType = this.value;
+                                    var tCodeInput = document.getElementById("tCodeInput");
+                                    var farmerIdInput = document.getElementById("farmerIdInput");
+
+                                    // Reset disabled and required attributes
+                                    tCodeInput.disabled = false;
+                                    tCodeInput.removeAttribute("required");
+                                    farmerIdInput.disabled = false;
+                                    farmerIdInput.removeAttribute("required");
+
+                                    if (userType === "0") { // User
+                                        tCodeInput.disabled = true;
+                                        farmerIdInput.disabled = true;
+                                    } else if (userType === "1") { // Admin
+                                        farmerIdInput.disabled = true;
+                                    } else if (userType === "2") { // Farmer
+                                        tCodeInput.disabled = true;
+                                    }
+                                });
+                        </script>
+
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Forget Password</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="custom-form" >
+                            <div class="form-group mb-3"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="email" id="otp" placeholder="OTP"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="password" id="password" name="password" placeholder="New Password"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="password" id="rePassword" placeholder="Re- Password"></div><button class="btn btn-success d-block submit-button w-100" type="Submit">Submit Form</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
+                </div>
+            </div>
+        </div>
+    <script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin_assest/js/aos.min.js"></script>
+    <script src="/admin_assest/js/bs-init.js"></script>
+    <script src="/admin_assest/js/Bootstrap-4---Payment-Form-script.js"></script>
+    <script src="/admin_assest/js/current-day.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/admin_assest/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
+    <script src="/admin_assest/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
+</body>
+
+</html>
