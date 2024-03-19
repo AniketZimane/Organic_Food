@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>About us - Brand</title>
+    <link rel="stylesheet" href="/admin_assest/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <link rel="stylesheet" href="/admin_assest/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/admin_assest/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/admin_assest/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/admin_assest/css/Bootstrap-4---Payment-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/FORM.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/admin_assest/css/Login-Form-Basic-icons.css">
+    <link rel="stylesheet" href="/admin_assest/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="/admin_assest/css/Ludens---Create-Edit-Form.css">
+    <link rel="stylesheet" href="/admin_assest/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/admin_assest/css/select.css">
+    <script src="/assets/js/sweetalert.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/bg.jpg');">
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">konkan most favorite brand</span><span class="site-heading-lower">sindhukonkan</span></h1>
+    <section class="page-section about-heading">
+        <div class="container">
+            <div style="color: rgb(133,135,150);height: 600px;">
+                <p class="text-center" style="font-family: 'Abril Fatface', serif;font-size: 40px;color: var(--bs-gray);">Order Details</p>
+                <form class="shadow align-content-center form-topborder" method="post" action="/admin/add/order/details/" th:object="${OrderPlased}" style="text-align: left;background: #ffffff;padding: 20px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Name*</label><input class="form-control" type="text" name="custName" placeholder="Enter Your Name" th:value="${userId}"></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;">
+                            <label class="form-label fw-bold">Product Titles*</label>
+                            <input class="form-control" type="text" name="buyProductName" required="" placeholder="Product Title"
+                                   th:value="${#strings.arrayJoin(productNames, ',')}">
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Total Amount*</label><input class="form-control" type="text" placeholder="Enter Value In Percentage" name="totalAmt" th:value="${totalAmt}" required=""></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="text" name="mobNO" placeholder="Mobile Number" required=""></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Select Payment Type*</label><select class="form-select" name="paymentType" required="">
+                                <option value="0" selected="">Select Payment Type</option>
+                                <option value="1">UPI</option>
+                                <option value="2">Cash on Delivery</option>
+                            </select></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;">
+                            <label class="form-label fw-bold"> Is Home and Office address Same</label>
+                            <div class="form-check">
+                                <input class="form-check-input" value="Y" type="radio" id="homeOfficeY" name="homeOfficeYN" onclick="toggleTextBox()">
+                                <label class="form-check-label" for="formCheck-2">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" value="N" type="radio" id="homeOfficeN" name="homeOfficeYN" onclick="toggleTextBox()" checked="">
+                                <label class="form-check-label" for="formCheck-3">No</label>
+                            </div>
+                            <script>
+                                function toggleTextBox() {
+                                    var homeText = document.getElementById("homeAdd");
+                                    var officeText = document.getElementById("officeAdd");
+                                    var yesRadio = document.getElementById("homeOfficeY");
+
+                                    if (yesRadio.checked) {
+                                        officeText.disabled = true;
+                                        officeText.value = homeText.value; // Copy value from homeText to officeText
+
+                                    } else {
+                                        officeText.disabled = false;
+                                        officeText.value = ""; // Clear officeText value
+                                    }
+                                }
+                            </script>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Home Address:-</label><textarea class="form-control" id="homeAdd" name="homeAddress" placeholder="Home Address" required=""></textarea>
+                            <hr class="my-4">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Office Address:-</label><textarea class="form-control" id="officeAdd" name="officeAddress" placeholder="Office Address"></textarea>
+                            <hr class="my-4">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="Submit"><i class="fa fa-save mx-3"></i>Save</button><button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="Button"><i class="fas fa-broom mx-3"></i>Clear</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div style="color: rgb(133,135,150);height: 600px;"></div>
+        </div>
+    </section>
+    <footer class="text-center footer text-faded py-5"></footer>
+    <script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admin_assest/js/bs-init.js"></script>
+    <script src="/admin_assest/js/Bootstrap-4---Payment-Form-script.js"></script>
+    <script src="/admin_assest/js/current-day.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/admin_assest/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
+    <script src="/admin_assest/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
+</body>
+
+</html>
