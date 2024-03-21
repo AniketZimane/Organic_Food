@@ -1,37 +1,33 @@
 package com.example.Organic_Food.Helper;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Component
 public class FileUploader {
 
-    final String DIR = new ClassPathResource("static/admin_assest/img/Product_img/").getFile().getAbsolutePath();
+    @Value("${upload.dir}")
+    private String uploadDir;
 
-    public FileUploader() throws IOException {
-    }
-
-
-    public boolean uploadFile(MultipartFile file, String fileNameNew)
-    {
+    public boolean uploadFile(MultipartFile file, String fileNameNew) {
         boolean result = false;
 
         try {
-            Files.copy(file.getInputStream(), Paths.get(DIR + File.separator + fileNameNew), StandardCopyOption.REPLACE_EXISTING);
+            Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            Files.copy(file.getInputStream(), uploadPath.resolve(fileNameNew));
             result = true;
         } catch (IOException e) {
-            result = false;
             e.printStackTrace();
         }
 
         return result;
     }
 }
-

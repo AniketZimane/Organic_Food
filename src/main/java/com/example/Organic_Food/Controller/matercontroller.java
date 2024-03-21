@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,20 +79,35 @@ public class matercontroller {
     @PostMapping("/add/product/")
     public String addNewProduct(Model model, Product addProd, MultipartFile file)
     {
+        System.out.println(addProd.getId());
+        if(addProd.getId()==null)
+        {
+            String fileNameOld = file.getOriginalFilename();
+            String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
+            addProd.setExtension(extension);
 
-        String fileNameOld = file.getOriginalFilename();
-        String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
-        addProd.setExtension(extension);
+            Product product = productRepo.save(addProd);
+            String fileNameNew = product.getId() + "." + extension;
 
-        Product product = productRepo.save(addProd);
-        String fileNameNew = product.getId() + "." + extension;
+            uploader.uploadFile(file, fileNameNew);
+            addProd.setExtension(extension);
+            Integer issueQty=0;
+            Integer returnQty=0;
+            ProductStock productStock=new ProductStock(product.getId(),product.getStock(),issueQty,returnQty,product.getStock(),product.getSystemDateTime());
+            productStockRepo.save(productStock);
+            model.addAttribute("msg", "Product Uploaded Successfully");
+        }
+        else{
+            try{
+                LocalDateTime date=LocalDateTime.now();
+                productRepo.save(new Product(addProd.getId(),addProd.getCategory(),addProd.getName(),addProd.getTitle(),addProd.getMnf_date(),addProd.getExp_date(),addProd.getUnit(),addProd.getPrize(),addProd.getDiscount_YN(),addProd.getDiscount(),addProd.getStock(),addProd.getExtension(),addProd.getBrief_info(),addProd.getProd_name(),addProd.getProd_add(),addProd.getProd_mob_number(),date));
+                model.addAttribute("msg","Product Updated successfully!");
+            }catch (Exception e)
+            {
+                model.addAttribute("emsg","Product not Updated yet...! Try after some time");
+            }
+        }
 
-        uploader.uploadFile(file, fileNameNew);
-        addProd.setExtension(extension);
-        Integer issueQty=0;
-        Integer returnQty=0;
-        ProductStock productStock=new ProductStock(product.getId(),product.getStock(),issueQty,returnQty,product.getStock(),product.getSystemDateTime());
-        productStockRepo.save(productStock);
         System.out.println("Data saved..");
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
@@ -100,7 +117,6 @@ public class matercontroller {
         model.addAttribute("productList",productList);
         model.addAttribute("blogList",blogList);
         model.addAttribute("reviewList",reviewList);
-        model.addAttribute("msg", "Product Uploaded Successfully");
         return "index";
     }
 

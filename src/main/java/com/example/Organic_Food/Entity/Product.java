@@ -33,6 +33,11 @@ public class Product {
     public Product() {
     }
 
+    public Product(Integer id, Integer stock) {
+        this.id = id;
+        this.stock = stock;
+    }
+
     public Product(Integer id, String category, String name, String title, String mnf_date, String exp_date, String unit, Integer prize, String discount_YN, Integer discount, Integer stock, String extension, String brief_info, String prod_name, String prod_add, String prod_mob_number, LocalDateTime systemDate) {
         this.id = id;
         this.category = category;
@@ -53,6 +58,24 @@ public class Product {
         this.systemDate = systemDate;
     }
 
+    public Product(String category, String name, String title, String mnf_date, String exp_date, String unit, Integer prize, String discount_YN, Integer discount, Integer stock, String extension, String brief_info, String prod_name, String prod_add, String prod_mob_number, LocalDateTime systemDate) {
+        this.category = category;
+        this.name = name;
+        this.title = title;
+        this.mnf_date = mnf_date;
+        this.exp_date = exp_date;
+        this.unit = unit;
+        this.prize = prize;
+        this.discount_YN = discount_YN;
+        this.discount = discount;
+        this.stock = stock;
+        this.extension = extension;
+        this.brief_info = brief_info;
+        this.prod_name = prod_name;
+        this.prod_add = prod_add;
+        this.prod_mob_number = prod_mob_number;
+        this.systemDate = systemDate;
+    }
 
     public Integer getId() {
         return id;

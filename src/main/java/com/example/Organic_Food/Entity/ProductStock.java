@@ -32,7 +32,15 @@ public class ProductStock {
         this.systemDate = systemDate;
     }
 
-
+    public ProductStock(Integer id, Integer productId, Integer openingBal, Integer returnQty, Integer issueQty, Integer closingQty, LocalDateTime systemDate) {
+        this.id = id;
+        this.productId = productId;
+        this.openingBal = openingBal;
+        this.returnQty = returnQty;
+        this.issueQty = issueQty;
+        this.closingQty = closingQty;
+        this.systemDate = systemDate;
+    }
 
     public Integer getId() {
         return id;
