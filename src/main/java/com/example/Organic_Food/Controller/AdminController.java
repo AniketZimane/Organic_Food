@@ -1,22 +1,37 @@
 package com.example.Organic_Food.Controller;
 
-import com.example.Organic_Food.Entity.Product;
-import com.example.Organic_Food.Entity.ProductStock;
+import com.example.Organic_Food.Entity.*;
+import com.example.Organic_Food.Helper.EmailService;
 import com.example.Organic_Food.Helper.FileUploader;
 import com.example.Organic_Food.Helper.ProductHelper;
 import com.example.Organic_Food.Repo.*;
-import org.hibernate.annotations.CreationTimestamp;
+import com.razorpay.Order;
+
+import jakarta.servlet.http.HttpSession;
+import org.json.JSONObject;
+import com.razorpay.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class AdminController {
+    @Autowired
+    HttpSession session;
+    @Autowired
+    tCodeRepo tCodeRepo1;
+    @Autowired
+    EmailService emailService;
+    @Autowired
+    RegistrationRepo registrationRepo;
     @Autowired
     ProductRepo productRepo;
     @Autowired
@@ -31,18 +46,20 @@ public class AdminController {
     ProductHelper productHelper;
     @Autowired
     ProductStockRepo productStockRepo;
+    @Autowired
+    TempOrderRepo tempOrderRepo;
+    @Autowired
+    OrderPlacedRepo orderPlacedRepo;
 
     @GetMapping("/admin/product/report/")
-    public String getAddBlogPage(Model model)
-    {
-        List<Product> productList=productRepo.findAll();
-        model.addAttribute("productList",productList);
+    public String getAddBlogPage(Model model) {
+        List<Product> productList = productRepo.findAll();
+        model.addAttribute("productList", productList);
         return "product_report";
     }
 
     @GetMapping("/admin/product/delete/{id}/")
-    public String deleteResultRecord(Model model, @PathVariable int id)
-    {
+    public String deleteResultRecord(Model model, @PathVariable int id) {
         productRepo.deleteById(id);
         List<Product> productList = productRepo.findAll();
         model.addAttribute("productList", productList);
@@ -50,51 +67,328 @@ public class AdminController {
     }
 
     @GetMapping("/admin/update/product/{id}/")
-    public String updateProductRecord(Model model, @PathVariable int id)
-    {
+    public String updateProductRecord(Model model, @PathVariable int id) {
         Product data = productRepo.getReferenceById(id);
         model.addAttribute("data", data);
+        model.addAttribute("id", data.getId());
         return "add_product";
     }
 
-    @GetMapping("/admin/order/")
-    public String orderPage()
-    {
-        return "order";
+    @GetMapping("/user/order/")
+    public String orderPage(Model model) {
+        List<Temp_order> tempOrders = tempOrderRepo.findAll();
+        Integer[] productId = new Integer[1000];
+        Integer[] productPrize = new Integer[1000];
+        Integer[] productQty = new Integer[1000];
+        Integer tempOrderLength = tempOrders.size();
+        String[] productName = new String[tempOrderLength];
+        String userId = null;
+        String Page = "Order";
+        int iterator = 0;
+        for (Temp_order data : tempOrders) {
+            productId[iterator] = data.getProductId();
+            productQty[iterator] = data.getProductQty();
+            productName[iterator] = productRepo.findProductNameById(data.getProductId());
+            userId = data.getUserId();
+            iterator++;
+
+        }
+        System.out.println(productId[0]);
+        try {
+            productPrize[0] = productRepo.findProductPrizeById(productId[0]);
+            Integer totalAmt = productPrize[0] * productQty[0];
+            model.addAttribute("productNames", productName);
+            model.addAttribute("totalAmt", totalAmt);
+            model.addAttribute("userId", userId);
+
+        } catch (Exception e) {
+            model.addAttribute("emsg", "Some thing went wrong");
+            Page = "index";
+        }
+
+        return Page;
     }
 
     @ResponseBody
     @PostMapping("/admin/passData/")
-    public String handlePostRequest(Model model, @RequestBody ProductHelper productHelper ) {
-        Integer closingBal=productStockRepo.findClosingStockByProductId(productHelper.getProductId());
-        System.out.println(closingBal);
-        List <ProductStock> productStockList=productStockRepo.findProductStockByProductId(productHelper.getProductId());
-        System.out.println(productStockList);
-        Integer productId;
-        Integer openingBal;
-        Integer returnQty;
-        Integer issueQty;
-        Integer closingQty;
-        LocalDateTime systemDate;
-        for (ProductStock i:productStockList) {
-            productId=productHelper.getProductId();
-            openingBal=i.getClosingQty();
-            System.out.println(openingBal);
-            returnQty=i.getReturnQty();
-            issueQty=productHelper.getProductQty();
-            closingQty=closingBal-productHelper.getProductQty();
-            systemDate=LocalDateTime.now();
-            if(closingBal>=productHelper.getProductQty())
+    public String handlePostRequest(Model model, @RequestBody ProductHelper productHelper) {
+        Integer closingBal = productStockRepo.findClosingStockByProductId(productHelper.getProductId());
+        if (closingBal != null) {
+            // Your existing code inside the if block
+            List<ProductStock> productStockList = productStockRepo.findProductStockByProductId(productHelper.getProductId());
+            Integer productId = 0;
+            Integer openingBal = 0;
+            Integer returnQty = 0;
+            Integer issueQty = 0;
+            Integer closingQty = 0;
+//            String userId="IT";
+            String userId = (String)session.getAttribute("key");
+            System.out.println("Session Id:"+userId);
+            LocalDateTime systemDate = null;
+            for (ProductStock i : productStockList) {
+                productId = productHelper.getProductId();
+                openingBal = i.getClosingQty();
+                System.out.println(openingBal);
+                returnQty = i.getReturnQty();
+                issueQty = productHelper.getProductQty();
+                closingQty = closingBal - productHelper.getProductQty();
+                systemDate = LocalDateTime.now();
+            }
+            if (closingBal >= productHelper.getProductQty()) {
+                ProductStock productStock = new ProductStock(productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+                Temp_order tempOrder = new Temp_order(productId, issueQty, userId);
+
+                try {
+                    List<Temp_order> tempOrders = tempOrderRepo.findByUserId(userId);
+                    Integer userSelectedProductId = tempOrderRepo.findProductIdByUserId(userId);
+                    Integer userSelectedProductQty = tempOrderRepo.findProductQtyByUserId(userId);
+                    System.out.println("user selected product id" + userSelectedProductId + "prod id" + productId);
+                    System.out.println("user selected product qty" + userSelectedProductQty + "prod qty" + issueQty);
+
+                    if (userSelectedProductId == productId && tempOrders != null || userSelectedProductQty != issueQty) {
+
+                        System.out.println("Data already int the field");
+                        Integer tempOrderUpdatedId = 0;
+                        for (Temp_order temp : tempOrders) {
+                            tempOrderUpdatedId = temp.getId();
+                        }
+                        Temp_order tempOrderUpdated = new Temp_order(tempOrderUpdatedId, productId, issueQty, userId);
+                        tempOrderRepo.save(tempOrderUpdated);
+                    } else {
+                        productStockRepo.save(productStock);
+                        tempOrderRepo.save(tempOrder);
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+
+            } else {
+                model.addAttribute("errorMsg", "Currently Stock Empty");
+            }
+        } else {
+            System.out.println("Data not found");
+        }
+        session.invalidate();
+        return "Data get it";
+
+    }
+//        Integer closingBal=productStockRepo.findClosingStockByProductId(productHelper.getProductId());
+//        System.out.println(closingBal);
+//        List <ProductStock> productStockList=productStockRepo.findProductStockByProductId(productHelper.getProductId());
+//        System.out.println(productStockList);
+//        Integer productId;
+//        Integer openingBal;
+//        Integer returnQty;
+//        Integer issueQty;
+//        Integer closingQty;
+//        String userId="IT";
+//        LocalDateTime systemDate;
+//        for (ProductStock i:productStockList) {
+//            productId=productHelper.getProductId();
+//            openingBal=i.getClosingQty();
+//            System.out.println(openingBal);
+//            returnQty=i.getReturnQty();
+//            issueQty=productHelper.getProductQty();
+//            closingQty=closingBal-productHelper.getProductQty();
+//            systemDate=LocalDateTime.now();
+//            if(closingBal>=productHelper.getProductQty())
+//            {
+//                ProductStock productStock=new ProductStock(productId,openingBal,returnQty,issueQty,closingQty,systemDate);
+//                Temp_order tempOrder=new Temp_order(productId,issueQty,userId);
+//                productStockRepo.save(productStock);
+//                tempOrderRepo.save(tempOrder);
+//            }
+//            else{
+//                model.addAttribute("errorMsg","Currently Stock Empty");
+//            }
+//        }
+//
+//        return "Data get it";
+//    }
+
+    @PostMapping("/admin/add/order/details/")
+    public String plasedOder(Model model, OrderPlased orderPlased) {
+        OrderPlased plased = orderPlacedRepo.save(orderPlased);
+        String invoiceNumber = orderPlacedRepo.findInvoiceIdByName(orderPlased.getCustName());
+        String productName = orderPlased.getBuyProductName();
+        String[] productNames = productName.split(",");
+        List<String> productNameList = Arrays.asList(productNames);
+        List<Integer> productIds = productRepo.findProductIdsByNames(productNameList);
+        Product productList = productRepo.getReferenceById(productRepo.findProductIdByName(productNames[0]));
+        model.addAttribute("productNames", productNames);
+        model.addAttribute("productQty", tempOrderRepo.findProductQtyByUserId("IT", productIds.get(0)));
+        model.addAttribute("productPrize", productList.getPrize());
+
+        model.addAttribute("buyerHomeAddress", orderPlased.getHomeAddress());
+        model.addAttribute("systemDate", orderPlased.getSystemDate());
+        model.addAttribute("status", orderPlased.getPaymentType());
+        model.addAttribute("buyerOfficeAddress", orderPlased.getOfficeAddress());
+        model.addAttribute("invoiceNumber", invoiceNumber);
+        model.addAttribute("custName", plased.getCustName());
+        return "invoice";
+    }
+
+    @ResponseBody
+    @PostMapping("/admin/payment_order/")
+    public String handlePostRequestOfSeatCount(Model model, @RequestBody String amountEntered) throws RazorpayException {
+        String arr[] = amountEntered.split("=");
+        System.out.println(arr[0]);
+        int amt = Integer.parseInt(arr[0]);
+        String userId=(String)session.getAttribute("key");
+        String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
+        String[] productsNamesArray = productNames.split(",");
+        String message="work in progress!";
+
+        for (String i:productsNamesArray) {
+            Integer productId=productRepo.findProductIdsByName(i);
+            Integer toProcureQty=tempOrderRepo.findProductQtyByUserId(userId,productId);
+            Integer actualStock=productRepo.findActualStockById(productId);
+            if(actualStock>=toProcureQty)
             {
-                ProductStock productStock=new ProductStock(productId,openingBal,returnQty,issueQty,closingQty,systemDate);
-                productStockRepo.save(productStock);
+                Integer remainStock=actualStock-toProcureQty;
+                Product data=new Product(productId,remainStock);
+                productRepo.save(data);
+                List<ProductStock> productStockList=productStockRepo.findProductStockByProductId(productId);
+                for (ProductStock productStock : productStockList) {
+                    Integer openingBal = productStock.getClosingQty();
+                    Integer returnQty = productStock.getReturnQty();
+                    Integer issueQty = productHelper.getProductQty();
+                    Integer closingQty = actualStock-toProcureQty;
+                    LocalDateTime systemDate = LocalDateTime.now();
+                    ProductStock productStockUpdated = new ProductStock(productStock.getId(),productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+                    tempOrderRepo.deleteByUserIdAndProductId(userId,productId);
+                }
             }
             else{
-                model.addAttribute("errorMsg","Currently Stock Empty");
+                message="Store is not available try after some time";
             }
+
+        }
+        RazorpayClient razorpay = null;
+        try {
+            razorpay = new RazorpayClient("rzp_test_61WqW2hrEvrGTv", "9EkJKA7v7OH4qWphUMtQTrEJ");
+        } catch (RazorpayException e) {
+            throw new RuntimeException(e);
+        }
+        JSONObject option = new JSONObject();
+        option.put("amount", amt * 100); // amount in the smallest currency unit
+        option.put("currency", "INR");
+        option.put("receipt", "order_rcptid_11");
+        Order order = razorpay.orders.create(option);
+        System.out.println("Order:" + order);
+        Integer amtval = option.getInt("amount");
+        String trncId = order.get("id");
+        String currency = option.getString("currency");
+
+        System.out.println(amtval);
+        session.invalidate();
+        message=order.toString();
+        return message;
+    }
+
+    @PostMapping("/new/user/registration/")
+    public String addUser(Model model, Registration registration) {
+        Registration registrationList = registrationRepo.getByEmail(registration.getEmail());
+        System.out.println(registrationList);
+        if (registrationList == null) {
+            Registration registration1 = registrationRepo.save(registration);
+            model.addAttribute("msg", "New User Register Successfully");
+        } else {
+            model.addAttribute("emsg", "User Already Exist");
         }
 
-        return "Data get it";
+        return "Admin_Login";
+    }
+
+    @GetMapping("/master/login/")
+    public String getAdminLogin(Model model) {
+        return "tcodeWiAdminLogin";
+    }
+
+    @PostMapping("/data/pass/controller/")
+    public String handleLogin(@RequestParam("logCode") String logCode, Model model) {
+        tCode code = tCodeRepo1.getReferenceById(1);
+        System.out.println(code.gettCodeValue() + " " + logCode);
+        String page = "tcodeWiAdminLogin";
+        if (code.gettCodeValue().equals(logCode)) {
+            model.addAttribute("msg", "Login Successfully");
+            page = "Admin_Dashboard";
+        } else {
+            model.addAttribute("emsg", "Check Your T Code");
+            page = "tcodeWiAdminLogin";
+        }
+        return page;
+    }
+    @GetMapping("/dashboard/")
+    public String getDashboard()
+    {
+        return "Admin_Dashboard";
+    }
+//    @GetMapping("/get/admin/key/")
+//    public String sendSpecialKey(Model model)
+//    {
+//        tCode code=tCodeRepo1.getReferenceById(1);
+//        String from = "ad.developer@gmail.com";
+//        String to = "aniketz2126@gmail.com";
+//        MimeMessage message=mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//        String maiSubject="Get Special Key - [Innovative THings] Account";
+//        String mailContent = "<h1>Get Special Key</h1><br>"
+//                + "<p>Dear <strong>" + to + "</strong></p>"
+//                + "<p>We have received a request to reset the password for your Innovative THings account.</p>"
+//                + "<p>Your new temporary password is: <strong>" + code.gettCodeValue() + "</strong></p>"
+//                + "<p>Please log in using this password and change it to a new one after signing in.</p>"
+//                + "<p>If you didn't request a password reset, please ignore this email.</p>"
+//                + "<p>If you have any questions or need further assistance, please don't hesitate to contact our support team at [SupportEmail].</p>"
+//                + "<p>Thank you,</p>"
+//                + "<p>The Innovative THings Team</p>";
+//        helper.setFrom(from,"Innovative Things");
+//        helper.setTo(to);
+//        helper.setSubject(maiSubject);
+//        helper.setText(mailContent,true);
+//
+//        try
+//        {
+//            mailSender.send(message);
+//            System.out.println("Email send successfully");
+//        }catch (Exception e)
+//        {
+//            System.out.println(e);
+//        }
+//
+//
+//        return "tcodeWiAdminLogin";
+//
+//    }
+    @GetMapping("/oder/placed/")
+    public String orderPaced(Model model)
+    {
+        String userId=(String)session.getAttribute("key");
+        String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
+        String[] productsNamesArray = productNames.split(",");
+        for (String i:productsNamesArray)
+        {
+            Integer productId = productRepo.findProductIdsByName(i);
+            Integer toProcureQty = tempOrderRepo.findProductQtyByUserId(userId, productId);
+            Integer actualStock = productRepo.findActualStockById(productId);
+            Integer remainStock = actualStock - toProcureQty;
+            Product data = new Product(productId, remainStock);
+            productRepo.save(data);
+            List<ProductStock> productStockList = productStockRepo.findProductStockByProductId(productId);
+            for (ProductStock productStock : productStockList) {
+                Integer openingBal = productStock.getClosingQty();
+                Integer returnQty = productStock.getReturnQty();
+                Integer issueQty = productHelper.getProductQty();
+                Integer closingQty = actualStock - toProcureQty;
+                LocalDateTime systemDate = LocalDateTime.now();
+                ProductStock productStockUpdated = new ProductStock(productStock.getId(), productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+                tempOrderRepo.deleteByUserIdAndProductId(userId, productId);
+            }
+        }
+        session.invalidate();
+        return "index";
     }
 
 }

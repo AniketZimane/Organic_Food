@@ -133,8 +133,8 @@
                             <div class="row justify-content-start">
                                 <div class="col-lg-7">
                                     <h1 class="display-2 mb-5 animated slideInDown">Organic Food Is Good For Health</h1>
-                                    <a href="" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                                    <a href="" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                    <a href="#product" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
+                                    <a href="#features" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
                                 </div>
                             </div>
                         </div>
@@ -183,12 +183,13 @@
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <h1 class="display-5 mb-4">Best Organic Fruits And Vegetables</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">Read More</a>
+                        <p class="mb-4">Organic fruits and vegetables are grown using natural methods without the use of synthetic pesticides, herbicides, or genetically modified organisms (GMOs). They offer numerous health benefits and are environmentally friendly.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Organic farming practices promote soil health and fertility by avoiding harmful chemicals.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Organic produce is rich in nutrients and antioxidants, providing superior taste and nutritional value.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>By choosing organic, you support sustainable agriculture, protect biodiversity, and reduce your exposure to potentially harmful substances.</p>
+<!--                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="/organic-details">Read More</a>-->
                     </div>
+
                 </div>
             </div>
         </div>
@@ -200,35 +201,19 @@
     <section id="features">
     <div class="container-fluid bg-light bg-icon my-5 py-6">
         <div class="container">
-            <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <h1 class="display-5 mb-3">Our Features</h1>
-                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-            </div>
+                <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <h1 class="display-5 mb-3">Our Features</h1>
+                    <p>Our Features Experience Below</p>
+                </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="featureData : ${featureList}">
                     <div class="bg-white text-center h-100 p-4 p-xl-5">
                         <img class="img-fluid mb-4" th:src="@{/admin_assest/img/Product_img/{fileName}/(fileName = ${featureData.id + '.' + featureData.extension})}" alt="">
                         <h4 class="mb-3" th:text="${featureData.title}">Natural Process</h4>
-                        <p class="mb-4" th:text="${featureData.briefInfo}">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>
+                        <p class="mb-4" th:text="${featureData.briefInfo}">Pure Organic Food Is our Standard </p>
+<!--                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>-->
                     </div>
                 </div>
-<!--                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
-<!--                    <div class="bg-white text-center h-100 p-4 p-xl-5">-->
-<!--                        <img class="img-fluid mb-4" src="/user_assest/img/icon-2.png" alt="">-->
-<!--                        <h4 class="mb-3">Organic Products</h4>-->
-<!--                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>-->
-<!--                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">-->
-<!--                    <div class="bg-white text-center h-100 p-4 p-xl-5">-->
-<!--                        <img class="img-fluid mb-4" src="/user_assest/img/icon-3.png" alt="">-->
-<!--                        <h4 class="mb-3">Biologically Safe</h4>-->
-<!--                        <p class="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>-->
-<!--                        <a class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href="">Read More</a>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
@@ -246,19 +231,6 @@
                         <h1 class="display-5 mb-3">Our Products</h1>
                         <p>At our company, we pride ourselves on producing healthy food that nourishes both body and mind. With a commitment to quality ingredients and meticulous preparation.</p>
                     </div>
-                </div>
-                <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                    <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Vegetable</a>
-                        </li>
-                        <li class="nav-item me-2">
-                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Fruits </a>
-                        </li>
-                        <li class="nav-item me-0">
-                            <a class="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Grossary</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="tab-content">
@@ -292,511 +264,11 @@
                             </div>
                         </div>
 
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-2.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-3.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-4.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-5.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-6.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-7.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-8.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                             <a class="btn btn-primary rounded-pill py-3 px-5" href="">Browse More Products</a>
                         </div>
                     </div>
                 </div>
-<!--                <div id="tab-2" class="tab-pane fade show p-0">-->
-<!--                    <div class="row g-4">-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-1.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-2.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-3.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-4.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-5.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-6.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-7.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-8.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-12 text-center">-->
-<!--                            <a class="btn btn-primary rounded-pill py-3 px-5" href="">Browse More Products</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="tab-3" class="tab-pane fade show p-0">-->
-<!--                    <div class="row g-4">-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-1.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-2.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-3.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-4.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-5.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-6.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-7.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-xl-3 col-lg-4 col-md-6">-->
-<!--                            <div class="product-item">-->
-<!--                                <div class="position-relative bg-light overflow-hidden">-->
-<!--                                    <img class="img-fluid w-100" src="/user_assest/img/product-8.jpg" alt="">-->
-<!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
-<!--                                </div>-->
-<!--                                <div class="text-center p-4">-->
-<!--                                    <a class="d-block h5 mb-2" href="">Fresh Tomato</a>-->
-<!--                                    <span class="text-primary me-1">$19.00</span>-->
-<!--                                    <span class="text-body text-decoration-line-through">$29.00</span>-->
-<!--                                </div>-->
-<!--                                <div class="d-flex border-top">-->
-<!--                                    <small class="w-50 text-center border-end py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
-<!--                                    </small>-->
-<!--                                    <small class="w-50 text-center py-2">-->
-<!--                                        <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>-->
-<!--                                    </small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-12 text-center">-->
-<!--                            <a class="btn btn-primary rounded-pill py-3 px-5" href="">Browse More Products</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     </section>
     <!-- Product End -->
 
@@ -826,7 +298,7 @@
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 class="display-5 mb-3">Customer Review</h1>
-                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                <p>Customer Review</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item position-relative bg-white p-5 mt-4" th:each="review1 : ${reviewList}">
@@ -887,7 +359,7 @@
         <div class="container">
             <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 class="display-5 mb-3">Latest Blog</h1>
-                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                <p>Organic fruits and vegetables are grown without the use of synthetic pesticides, herbicides, or fertilizers, making them healthier choices for you and the environment.</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="data : ${blogList}">
@@ -934,11 +406,11 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h1 class="fw-bold text-primary mb-4">Sin<span class="text-secondary">dhu</span>Konkan</h1>
-                    <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                    <p>Organic food is produced using methods that do not involve modern synthetic inputs such as synthetic pesticides and chemical fertilizers. It is grown using natural fertilizers like compost and manure. Organic farming practices promote ecological balance and conserve biodiversity.</p></p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href="https://www.instagram.com/_just_coder_think?igsh=YjhreTQONnFjZ2tj"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-square btn-outline-light rounded-circle me-1" href="https://www.instagram.com/_just_coder_think?igsh=YjhreTQONnFjZ2tj"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="https://www.youtube.com/@digitaltech9193"><i class="fab fa-youtube"></i></a>
                         <a class="btn btn-square btn-outline-light rounded-circle me-0" href="https://www.instagram.com/_just_coder_think?igsh=YjhreTQONnFjZ2tj"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
