@@ -35,16 +35,16 @@
                 <p class="text-center" style="font-family: 'Abril Fatface', serif;font-size: 40px;color: var(--bs-gray);">Order Details</p>
                 <form class="shadow align-content-center form-topborder" method="post" action="/user/add/order/details/" th:object="${OrderPlased}" style="text-align: left;background: #ffffff;padding: 20px;">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Name*</label><input class="form-control" type="text" name="custName" placeholder="Enter Your Name" th:value="${userId}"></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Name*</label><input class="form-control" type="text" name="custName" placeholder="Enter Your Name" th:value="${userId}" readonly></div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Product Titles*</label>
                             <input class="form-control" type="text" name="buyProductName" required="" placeholder="Product Title"
-                                   th:value="${#strings.arrayJoin(productNames, ',')}">
+                                   th:value="${#strings.arrayJoin(productNames, ',')}" readonly>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Total Amount*</label><input class="form-control" type="text" placeholder="Enter Value In Percentage" name="totalAmt" th:value="${totalAmt}" required=""></div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="text" name="mobNO" placeholder="Mobile Number" required=""></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Total Amount*</label><input class="form-control" type="number" placeholder="Enter Value In Percentage" name="totalAmt" th:value="${totalAmt}" required="" readonly></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="text" name="mobNO" placeholder="Mobile Number" required="" pattern="^\d{10}$"></div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Select Payment Type*</label><select class="form-select" name="paymentType" required="">
-                                <option value="0" selected="">Select Payment Type</option>
+                                <option selected="">Select Payment Type</option>
                                 <option value="1">UPI</option>
                                 <option value="2">Cash on Delivery</option>
                             </select></div>

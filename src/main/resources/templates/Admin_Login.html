@@ -62,7 +62,7 @@
                                 <div th:if="${param.logout}" class="alert alert-success">
                                     You have been logged out.
                                 </div>
-                                <div class="email-login" style="background-color: #ffffff;"><input type="email" class="email-imput form-control" style="margin-top: 10px;" required="" placeholder="Email" minlength="6" name="email">
+                                <div class="email-login" style="background-color: #ffffff;"><input type="email" class="email-imput form-control" style="margin-top: 10px;" required="" placeholder="Registered Email Id" minlength="6" name="email">
                                     <input type="password" class="password-input form-control" style="margin-top: 10px;" required="" name="password" placeholder="Password" minlength="6"></div>
                                 <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;">
                                     <button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
@@ -98,25 +98,29 @@
                     </div>
                     <div class="modal-body">
                         <form data-aos="fade" class="custom-form" method="post" action="/new/user/registration/" th:object="${Registration}">
-                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter User Name" required="" name="username"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter Your Name" required="" name="username" pattern="^[A-Za-z]+(?:[\s-][A-Za-z]+)*$"></div>
                             <div class="form-group mb-3"><input class="form-control" type="email" placeholder="Official Email" required="" name="email"></div>
 
                             <div class="field">
                                 <label class="form-label mb-0" for="float-input">Select User Type</label>
                                 <select class="form-select" name="userType" id="userTypeSelect">
-                                    <option value="13" selected="">Select User</option>
+                                    <option selected="">Select User</option>
                                     <option value="0">User</option>
                                     <option value="1">Admin</option>
-                                    <option value="3">Farmer</option>
+                                    <option value="2">Farmer</option>
                                 </select>
                                 <br>
                             </div>
-                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter T-Code" minlength="4" maxlength="4" required="" name="tCode" id="tCodeInput"></div>
-                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter Farmer Id" minlength="4" maxlength="4" required="" name="farmerId" id="farmerIdInput"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter T-Code" minlength="4" maxlength="4" required="" name="tCode" id="tCodeInput" pattern="^[A-Z]+$"></div>
+                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter Farmer Id" minlength="10" maxlength="12" required="" name="farmerId" id="farmerIdInput" pattern="^[A-Za-z0-9]+$"></div>
                             <!--                            <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter OTP" minlength="4" maxlength="4" required=""></div>-->
-                            <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Password" minlength="8" name="password" maxlength="15" required=""></div>
-                            <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Re-Password" required=""></div>
-                            <button class="btn btn-success d-block submit-button w-100" type="submit">Submit Form</button>
+                            <div class="form-group mb-3">
+                                <input class="form-control" type="password" placeholder="Password" minlength="8" name="password" maxlength="15" required="" id="password1">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input class="form-control" type="password" placeholder="Re-Password" required="" id="rePassword1">
+                            </div>
+                            <button class="btn btn-success d-block submit-button w-100" type="submit" id="submitButton1" disabled>Submit Form</button>
                         </form>
 
                         <script>
@@ -140,6 +144,31 @@
                                         tCodeInput.disabled = true;
                                     }
                                 });
+
+                                // Get references to the password and re-enter password fields
+                                const passwordField = document.getElementById('password1');
+                                const rePasswordField = document.getElementById('rePassword1');
+
+                                // Get reference to the submit button
+                                const submitButton = document.getElementById('submitButton1');
+
+                                // Function to check if passwords match
+                                function checkPasswords() {
+                                    const password = passwordField.value;
+                                    const rePassword = rePasswordField.value;
+
+                                    if (password === rePassword) {
+                                        // Passwords match, enable the submit button
+                                        submitButton.disabled = false;
+                                    } else {
+                                        // Passwords don't match, disable the submit button
+                                        submitButton.disabled = true;
+                                    }
+                                }
+
+                                // Add event listeners to both password fields to check for changes
+                                passwordField.addEventListener('input', checkPasswords);
+                                rePasswordField.addEventListener('input', checkPasswords);
                         </script>
 
                     </div>
@@ -147,25 +176,54 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Forget Password</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="custom-form" >
-                            <div class="form-group mb-3"><input class="form-control" type="email" name="email" placeholder="Email" id="email"></div>
-                            <div class="form-group mb-3"><input class="form-control" type="email" id="otp" placeholder="OTP"></div>
-                            <div class="form-group mb-3"><input class="form-control" type="password" id="password" name="password" placeholder="New Password"></div>
-                            <div class="form-group mb-3"><input class="form-control" type="password" id="rePassword" placeholder="Re- Password"></div><button class="btn btn-success d-block submit-button w-100" type="Submit">Submit Form</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
-                </div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Forget Password</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <form class="custom-form">
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="email" name="email" placeholder="Email" id="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="email" id="otp" placeholder="OTP" maxlength="4">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="New Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="password" id="rePassword" placeholder="Re-Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                    </div>
+                    <button class="btn btn-success d-block submit-button w-100" type="Submit" id="submitButton" disabled>Submit Form</button>
+                </form>
+            </div>
+            <script>
+                // JavaScript code to enable/disable submit button based on password match
+                const passwordField = document.getElementById('password');
+                const rePasswordField = document.getElementById('rePassword');
+                const submitButton = document.getElementById('submitButton');
+
+                function checkPasswords() {
+                    const password = passwordField.value;
+                    const rePassword = rePasswordField.value;
+
+                    if (password === rePassword) {
+                        submitButton.disabled = false;
+                    } else {
+                        submitButton.disabled = true;
+                    }
+                }
+
+                passwordField.addEventListener('input', checkPasswords);
+                rePasswordField.addEventListener('input', checkPasswords);
+            </script>
         </div>
-    <script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
+    </div>
+</div>
+<script src="/admin_assest/bootstrap/js/bootstrap.min.js"></script>
     <script src="/admin_assest/js/aos.min.js"></script>
     <script src="/admin_assest/js/bs-init.js"></script>
     <script src="/admin_assest/js/Bootstrap-4---Payment-Form-script.js"></script>

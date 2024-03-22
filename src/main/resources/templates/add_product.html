@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Select Product Id*</label>
-                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}">
+                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}, ${data?.id != null} ? required : ''">
                                 <option selected disabled>Select Product Id</option>
                                 <option th:value="${data?.id}" th:text="${data?.id}">---------</option>
                             </select>
@@ -44,13 +44,13 @@
 
 
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;"><label class="form-label fw-bold">Select Product Category*</label><select class="form-select" name="category" required>
-                                <option value="undefined" selected="" disabled=''>Select Category</option>
+                                <option disabled=''>Select Category</option>
                                 <option value="1">Vegitable</option>
                                 <option value="2">Fruits</option>
                                 <option value="2">Grossary</option>
                             </select></div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Name*</label><input class="form-control" th:value="${data?.name}" type="text" name="name" placeholder="Product Name" required></div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Title*</label><input class="form-control" th:value="${data?.title}" type="text" name="title" placeholder="Product Title" required></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Name*</label><input class="form-control" th:value="${data?.name}" type="text" name="name" placeholder="Product Name" required pattern="^[A-Z]+$"></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Product Title*</label><input class="form-control" th:value="${data?.title}" type="text" name="title" placeholder="Product Title" required pattern="^[A-Z]+$"></div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Manufacturing Date*</label>
                             <input class="form-control" th:value="${data?.mnf_date}" type="date" id="mnf_date" name="mnf_date" required>
@@ -107,8 +107,8 @@
                                 }
                             }
                         </script>
-                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Per Unit Prize *</label><input class="form-control" type="text" placeholder="Enter Per Unit Prize" th:value="${data?.prize}" name="prize" required></div>
-                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Discount %*</label><input class="form-control" type="text" placeholder="Enter Value In Percentage" id="discount_field" th:value="${data?.discount}" name="discount" disabled></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Per Unit Prize *</label><input class="form-control" type="number" placeholder="Enter Per Unit Prize" th:value="${data?.prize}" name="prize" required></div>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Discount %*</label><input class="form-control" type="number" placeholder="Enter Value In Percentage" id="discount_field" th:value="${data?.discount}" name="discount" disabled></div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Total Stock</label><input class="form-control" type="number" placeholder="0" th:value="${data?.stock}" name="stock" required></div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Product Photo</label><input class="form-control" type="file" required="" name="file" th:value="${data?.extension}" accept="image/*"></div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info Of Product</label><textarea class="form-control" placeholder="Product Details" th:value="${data?.brief_info}" name="brief_info" required></textarea>
@@ -122,9 +122,9 @@
                                 <div class="col-sm-4 col-md-4 col-xl-2 justify-content-center"><button class="btn btn-primary btn-sm-guinda mx-1" type="button"><i class="fa fa-minus"></i></button><button class="btn btn-primary btn-sm-guinda" type="button"><i class="fa fa-plus"></i></button></div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Name:</label><input class="form-control" type="text" th:value="${data?.prod_name}" name="prod_name" placeholder="Farmer Name"></div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Address:</label><input class="form-control" type="text" th:value="${data?.prod_add}" name="prod_add" placeholder="Farmer Address"></div>
-                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="number"  th:value="${data?.prod_mob_number}" name="prod_mob_number" placeholder="Mobile Number"></div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Name:</label><input class="form-control" type="text" th:value="${data?.prod_name}" name="prod_name" placeholder="Farmer Name" pattern="^[A-Z]+$"></div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Producer Address:</label><input class="form-control" type="text" th:value="${data?.prod_add}" name="prod_add" placeholder="Farmer Address" pattern="^[A-Za-z0-9\s.,'-]+$"></div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="number"  th:value="${data?.prod_mob_number}" name="prod_mob_number" placeholder="Mobile Number" pattern="^\d{10}$"></div>
                             </div>
                         </div>
                     </div>
