@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Select Product Id*</label>
-                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}, ${data?.id != null} ? required : ''">
+                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}">
                                 <option selected disabled>Select Product Id</option>
                                 <option th:value="${data?.id}" th:text="${data?.id}">---------</option>
                             </select>
