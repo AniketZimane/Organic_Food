@@ -25,7 +25,7 @@
 
 <body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/bg.jpg');">
     <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">A Free Bootstrap 5 Business Theme&nbsp;</span><span class="site-heading-lower">Business Casual</span></h1>
-    <div th:replace="fragment.html ::adminfragment"></div>
+    <div th:if="${userType == 1}" then th:replace="fragment.html :: adminfragment"></div>
     <section class="page-section about-heading">
         <div class="container">
             <div style="color: rgb(133,135,150);height: 600px;">
@@ -38,7 +38,7 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Name*</label><input class="form-control" type="text" name="name" placeholder="Enter Name" pattern="^[A-Z\s]+$"></div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Profession*</label><input class="form-control" type="text" name="Profession" placeholder="Enter Profession" pattern="^[A-Z\s]+$"></div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Upload Photo</label><input class="form-control" type="file" name="file" accept="image/*"></div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info About Review&nbsp;</label><textarea class="form-control" placeholder="Enter your review" name="briefInfo"></textarea>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info About Review&nbsp;</label><textarea class="form-control" placeholder="Enter your review" name="briefInfo" maxlength="118"></textarea>
                             <hr class="my-4">
                         </div>
                     </div>
