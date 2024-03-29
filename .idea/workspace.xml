@@ -4,39 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.7">
+    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.9">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Controller/matercontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Controller/matercontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Entity/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Repo/RegistrationRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Repo/RegistrationRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Repo/ReviewRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Repo/ReviewRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Security/MySecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Organic_Food/Security/MySecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admin_assest/img/Product_img/202.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admin_assest/img/Product_img/252.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admin_assest/img/Product_img/302.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add_product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add_review.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add_review.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/invoice.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/review_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/review_report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application-dev.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/SecurityController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/SecurityController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/matercontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Controller/matercontroller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Entity/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Entity/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Helper/CustomUserDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Helper/CustomUserDetailService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Repo/RegistrationRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Repo/RegistrationRepo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Repo/ReviewRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Repo/ReviewRepo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Security/MySecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Organic_Food/Security/MySecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/admin_assest/img/Product_img/202.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/admin_assest/img/Product_img/202.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/admin_assest/img/Product_img/252.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/admin_assest/img/Product_img/302.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/add_product.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/add_product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/add_review.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/add_review.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/fragment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/invoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/invoice.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/review_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/review_report.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +49,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="diployment_1.1.7" />
+        <entry key="$PROJECT_DIR$" value="diployment_1.1.9" />
         <entry key="$PROJECT_DIR$/src/main/java/com/example/Organic_Food" value="master_1.1" />
       </map>
     </option>
@@ -388,7 +372,28 @@
       <option name="project" value="LOCAL" />
       <updated>1711419853823</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Diployment1.1.7&#10;Diployment1.1.6">
+      <created>1711728929987</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1711728929987</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Diployment1.1.7&#10;Diployment1.1.6">
+      <created>1711728976052</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1711728976052</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Diployment1.1.9">
+      <created>1711987704213</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1711987704213</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -418,7 +423,9 @@
     <MESSAGE value="Diployment1.1.5" />
     <MESSAGE value="Diployment1.1.6" />
     <MESSAGE value="Diployment1.1.7" />
-    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.7" />
+    <MESSAGE value="Diployment1.1.7&#10;Diployment1.1.6" />
+    <MESSAGE value="Diployment1.1.9" />
+    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.9" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

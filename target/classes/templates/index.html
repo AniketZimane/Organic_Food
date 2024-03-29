@@ -302,51 +302,16 @@
                 <p>Customer Review</p>
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                <div class="testimonial-item position-relative bg-white p-5 mt-4" th:each="review1 : ${reviewList}">
+                <div class="testimonial-item position-relative bg-white p-5 mt-4" >
+                    <div th:each="review1 : ${reviewList}">
                     <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
                     <p class="mb-4" th:text="${review1.briefInfo}"></p>
-                    <div class="d-flex align-items-center">
-                        <img class="flex-shrink-0 rounded-circle" th:src="@{/admin_assest/img/Product_img/{fileName}/(fileName = ${review1.id + '.' + review1.extension})}" alt="">
-                        <div class="ms-3">
+                        <img class="flex-shrink-0 rounded-circle" th:src="@{admin_assest/img/Product_img/{fileName}/(fileName = ${review1.id + '.' + review1.extension})}" alt="">
                             <h5 class="mb-1" th:text="${review1.name}">Client Name</h5>
                             <span th:text="${review1.Profession}">Profession</span>
-                        </div>
                     </div>
                 </div>
             </div>
-<!--                <div class="testimonial-item position-relative bg-white p-5 mt-4">-->
-<!--                    <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>-->
-<!--                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>-->
-<!--                    <div class="d-flex align-items-center">-->
-<!--                        <img class="flex-shrink-0 rounded-circle" src="/user_assest/img/testimonial-2.jpg" alt="">-->
-<!--                        <div class="ms-3">-->
-<!--                            <h5 class="mb-1">Client Name</h5>-->
-<!--                            <span>Profession</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="testimonial-item position-relative bg-white p-5 mt-4">-->
-<!--                    <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>-->
-<!--                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>-->
-<!--                    <div class="d-flex align-items-center">-->
-<!--                        <img class="flex-shrink-0 rounded-circle" src="/user_assest/img/testimonial-3.jpg" alt="">-->
-<!--                        <div class="ms-3">-->
-<!--                            <h5 class="mb-1">Client Name</h5>-->
-<!--                            <span>Profession</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="testimonial-item position-relative bg-white p-5 mt-4">-->
-<!--                    <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>-->
-<!--                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>-->
-<!--                    <div class="d-flex align-items-center">-->
-<!--                        <img class="flex-shrink-0 rounded-circle" src="/user_assest/img/testimonial-4.jpg" alt="">-->
-<!--                        <div class="ms-3">-->
-<!--                            <h5 class="mb-1">Client Name</h5>-->
-<!--                            <span>Profession</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
 
         </div>
     </div>
@@ -364,7 +329,7 @@
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="data : ${blogList}">
-                    <img class="img-fluid" th:src="@{/admin_assest/img/Product_img/{fileName}/(fileName = ${data.id + '.' + data.extension})}" src="/user_assest/img/blog-1.jpg" alt="">
+                    <img class="img-fluid" th:src="@{admin_assest/img/Product_img/{fileName}/(fileName = ${data.id + '.' + data.extension})}" src="/user_assest/img/blog-1.jpg" alt="">
                     <div class="bg-light p-4">
                         <a class="d-block h5 lh-base mb-4" href="" th:text="${data.title}">How to cultivate organic fruits and vegetables in own firm</a>
                         <div class="text-muted border-top pt-4">
@@ -373,26 +338,6 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">-->
-<!--                    <img class="img-fluid" src="/user_assest/img/blog-2.jpg" alt="">-->
-<!--                    <div class="bg-light p-4">-->
-<!--                        <a class="d-block h5 lh-base mb-4" href="">How to cultivate organic fruits and vegetables in own firm</a>-->
-<!--                        <div class="text-muted border-top pt-4">-->
-<!--                            <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small>-->
-<!--                            <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>01 Jan, 2045</small>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">-->
-<!--                    <img class="img-fluid" src="/user_assest/img/blog-3.jpg" alt="">-->
-<!--                    <div class="bg-light p-4">-->
-<!--                        <a class="d-block h5 lh-base mb-4" href="">How to cultivate organic fruits and vegetables in own firm</a>-->
-<!--                        <div class="text-muted border-top pt-4">-->
-<!--                            <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small>-->
-<!--                            <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>01 Jan, 2045</small>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>div-->
             </div>
         </div>
     </div>
@@ -417,9 +362,9 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, Kudal, Sindhudurg</p>
                     <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <p><i class="fa fa-envelope me-3"></i>ad.developer1604@gmail.com</p>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Quick Links</h4>
@@ -428,14 +373,6 @@
                     <a class="btn btn-link" href="#">Our Services</a>
                     <a class="btn btn-link" href="#">Terms & Condition</a>
                     <a class="btn btn-link" href="#">Support</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Newsletter</h4>
-                    <p>Keep Connect with us</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <a href="#" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Get Update from us</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -446,7 +383,6 @@
                         &copy; <a href="#">SindhuKonkan</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                         Designed By <a href="https://www.instagram.com/_just_coder_think?igsh=YjhreTQONnFjZ2tj">Innovative Things</a>
                         <br>Distributed By: <a href="https://www.instagram.com/_just_coder_think?igsh=YjhreTQONnFjZ2tj" target="_blank">Innovative Things</a>
                     </div>

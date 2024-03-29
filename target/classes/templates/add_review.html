@@ -32,18 +32,23 @@
                 <p class="text-center" style="font-family: 'Abril Fatface', serif;font-size: 40px;color: var(--bs-gray);">ADD REVIEW</p>
                 <form method="post" action="/add/review/" th:object="${Review}" enctype="multipart/form-data" class="shadow align-content-center form-topborder" style="text-align: left;background: #ffffff;padding: 20px;">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;"><label class="form-label fw-bold">Select Id*</label><select class="form-select" name="id" disabled="">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;"><label class="form-label fw-bold">Select Id*</label>
+                            <select class="form-select" name="id" th:attr="disabled=${data?.id == null}">
                                 <option value="undefined" selected="">Select Id</option>
+                                <option th:value="${data?.id}" th:text="${data?.id}">---------</option>
                             </select></div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Name*</label><input class="form-control" type="text" name="name" placeholder="Enter Name" pattern="^[A-Z\s]+$"></div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Profession*</label><input class="form-control" type="text" name="Profession" placeholder="Enter Profession" pattern="^[A-Z\s]+$"></div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Upload Photo</label><input class="form-control" type="file" name="file" accept="image/*"></div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info About Review&nbsp;</label><textarea class="form-control" placeholder="Enter your review" name="briefInfo" maxlength="118"></textarea>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Name*</label><input class="form-control" type="text" th:value="${data?.name}" name="name" placeholder="Enter Name" pattern="^[A-Zaz\s]+$" required></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Profession*</label><input class="form-control" type="text" th:value="${data?.Profession}" name="Profession" placeholder="Enter Profession" pattern="^[A-Zaz\s]+$" required></div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Upload Your Photo</label><input class="form-control" type="file" name="file" accept="image/*"></div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info About Review&nbsp;</label><textarea class="form-control" placeholder="Enter your review" th:value="${data?.briefInfo}" name="briefInfo" maxlength="118" required></textarea>
                             <hr class="my-4">
                         </div>
                     </div>
                     <hr>
-                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="submit"><i class="fa fa-save mx-3"></i>Save</button><button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="button"><i class="fas fa-broom mx-3"></i>Clear</button><button class="btn btn-primary col-xl-12 mt-2 btn-cancelar col-sm-12 col-12" type="button"><i class="fas fa-arrow-left mx-3"></i>Update</button></div>
+                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="submit"><i class="fa fa-save mx-3"></i>Save</button>
+                        <button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="reset"><i class="fas fa-broom mx-3"></i>Clear</button>
+<!--                        <button class="btn btn-primary col-xl-12 mt-2 btn-cancelar col-sm-12 col-12" type="button"><i class="fas fa-arrow-left mx-3"></i>Update</button>-->
+                    </div>
                 </form>
             </div>
         </div>

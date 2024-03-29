@@ -23,6 +23,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('assets/img/bg.jpg');">
@@ -32,7 +33,7 @@
         <div class="container">
             <div style="color: rgb(133,135,150);height: 600px;">
                 <p class="text-center" style="font-family: 'Abril Fatface', serif;font-size: 40px;color: var(--bs-gray);">ADD PRODUCT</p>
-                <form method="post" action="/add/product/" th:object="${Product}" enctype="multipart/form-data" class="shadow align-content-center form-topborder" style="text-align: left;background: #ffffff;padding: 20px;">
+                <form method="post" action="/add/product/" th:object="${Product}" enctype="multipart/form-data" class="shadow align-content-center form-topborder" id="myForm" style="text-align: left;background: #ffffff;padding: 20px;">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Select Product Id*</label>
@@ -110,7 +111,7 @@
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Per Unit Prize *</label><input class="form-control" type="number" placeholder="Enter Per Unit Prize" th:value="${data?.prize}" name="prize" required></div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Discount %*</label><input class="form-control" type="number" placeholder="Enter Value In Percentage" id="discount_field" th:value="${data?.discount}" name="discount" disabled></div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enter Total Stock</label><input class="form-control" type="number" placeholder="0" th:value="${data?.stock}" name="stock" required></div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Product Photo</label><input class="form-control" type="file" required="" name="file" th:value="${data?.extension}" accept="image/*"></div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Product Photo</label><input class="form-control" type="file" required="" name="file" accept="image/*"></div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Brief Info Of Product</label><textarea class="form-control" placeholder="Product Details" th:value="${data?.brief_info}" name="brief_info" required></textarea>
                             <hr class="my-4">
                         </div>
@@ -129,8 +130,12 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="submit"><i class="fa fa-save mx-3"></i>Save</button><button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="button"><i class="fas fa-broom mx-3"></i>Clear</button><button class="btn btn-primary col-xl-12 mt-2 btn-cancelar col-sm-12 col-12" type="button"><i class="fas fa-edit mx-3" style="font-size: 17px;"></i>Update</button></div>
+                    <div class="mt-4 mt-lg-4 my-4"><button class="btn btn-primary col-xl-12 btn-guardar col-sm-12 col-12" type="submit"><i class="fa fa-save mx-3"></i>Save</button>
+                        <button class="btn btn-primary col-xl-12 mt-2 btn-limpiar col-sm-12 col-12" type="reset"><i class="fas fa-broom mx-3"></i>Clear</button>
+<!--                        <button class="btn btn-primary col-xl-12 mt-2 btn-cancelar col-sm-12 col-12" type="button"><i class="fas fa-edit mx-3" style="font-size: 17px;"></i>Update</button>-->
+                    </div>
                 </form>
+
             </div>
         </div>
         <div class="container">
