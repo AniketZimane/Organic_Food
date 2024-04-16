@@ -36,7 +36,7 @@ public class MySecurityConfig
                 .authorizeHttpRequests()
                 .requestMatchers("/user_assest/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/new/user/registration/").permitAll()
                 .requestMatchers("/product/","/review/","/feature/","/blog/","/add/feature/","/add/product/**","/dashboard/","/scheme/","/add/scheme/").hasRole("ADMIN")
-                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/admin/payment_order/","/user/order/","/admin/add/order/details/","/admin/add/order/details/","/add/to/card/**","/add/to/card/**","/oder/placed/","/user/order/","/admin/add/order/details/").hasRole("USER")
+                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/admin/payment_order/","/user/order/","/admin/add/order/details/","/admin/add/order/details/","/add/to/card/**","/add/to/card/**","/oder/placed/","/user/order/","/admin/add/order/details/","/review/").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
