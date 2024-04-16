@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.11" />
+    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.10" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +31,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="diployment_1.1.9" />
+        <entry key="$PROJECT_DIR$" value="diployment_1.1.10" />
         <entry key="$PROJECT_DIR$/src/main/java/com/example/Organic_Food" value="master_1.1" />
       </map>
     </option>
@@ -389,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713230630438</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Diployment1.1.10">
+      <created>1713230964611</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1713230964612</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -421,9 +428,9 @@
     <MESSAGE value="Diployment1.1.7" />
     <MESSAGE value="Diployment1.1.7&#10;Diployment1.1.6" />
     <MESSAGE value="Diployment1.1.9" />
-    <MESSAGE value="Diployment1.1.10" />
     <MESSAGE value="Diployment1.1.11" />
-    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.11" />
+    <MESSAGE value="Diployment1.1.10" />
+    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.10" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
