@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.10" />
+    <list default="true" id="ab1b1ead-1a32-4baa-977a-d7753fbab7a4" name="Changes" comment="Diployment1.1.12">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,7 +33,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="diployment_1.1.10" />
+        <entry key="$PROJECT_DIR$" value="diployment_1.1.11" />
         <entry key="$PROJECT_DIR$/src/main/java/com/example/Organic_Food" value="master_1.1" />
       </map>
     </option>
@@ -396,7 +398,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713230964612</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Diployment1.1.12">
+      <created>1713275343425</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1713275343425</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -430,7 +439,8 @@
     <MESSAGE value="Diployment1.1.9" />
     <MESSAGE value="Diployment1.1.11" />
     <MESSAGE value="Diployment1.1.10" />
-    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.10" />
+    <MESSAGE value="Diployment1.1.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="Diployment1.1.12" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
