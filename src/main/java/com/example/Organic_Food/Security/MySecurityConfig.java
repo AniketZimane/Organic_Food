@@ -34,9 +34,10 @@ public class MySecurityConfig
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user_assest/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/new/user/registration/").permitAll()
-                .requestMatchers("/product/","/review/","/feature/","/blog/","/add/feature/","/add/product/**","/dashboard/","/scheme/","/add/scheme/").hasRole("ADMIN")
-                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/admin/payment_order/","/user/order/","/admin/add/order/details/","/admin/add/order/details/","/add/to/card/**","/add/to/card/**","/oder/placed/","/user/order/","/admin/add/order/details/").hasRole("USER")
+                .requestMatchers("/user_assest/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/new/user/registration/","/user/add/order/details/","/oder/placed/","/admin/payment_order/","/add/product/").permitAll()
+                .requestMatchers("/product/","/feature/","/blog/","/add/feature/","/add/product/","/dashboard/","/scheme/","/add/scheme/","/admin/review/status/update/*","/review/report/","/admin/review/update/*","/admin/review/delete/*").hasRole("ADMIN")
+                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/user/order/","/add/to/card/*","/user/order/","/admin/payment_order/","/review/","/add/review/","/payment/").hasRole("USER")
+                .requestMatchers("/dashboard/").hasRole("FARMER")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -49,9 +50,9 @@ public class MySecurityConfig
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").permitAll()
+                .logoutSuccessUrl("/login/").permitAll()
                 .and()
-                .rememberMe().rememberMeParameter("remember_me").key("mySecreteKey").tokenValiditySeconds(60 * 60 * 60 * 24 * 7);
+                .rememberMe().rememberMeParameter("remember_me").key("mySecreteKey").tokenValiditySeconds(60 * 15);
 
         return http.build();
     }
