@@ -16,10 +16,21 @@ public class Review {
     String Profession;
     String extension;
     String briefInfo;
+    String status;
     @CreationTimestamp
     LocalDate systemDate;
 
     public Review() {
+    }
+
+    public Review(Integer id, String name, String profession, String extension, String briefInfo, String status, LocalDate systemDate) {
+        this.id = id;
+        this.name = name;
+        Profession = profession;
+        this.extension = extension;
+        this.briefInfo = briefInfo;
+        this.status = status;
+        this.systemDate = systemDate;
     }
 
     public Review(Integer id, String name, String profession, String extension, String briefInfo, LocalDate systemDate) {
@@ -71,6 +82,14 @@ public class Review {
         this.briefInfo = briefInfo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public LocalDate getSystemDate() {
         return systemDate;
     }
@@ -87,6 +106,7 @@ public class Review {
                 ", Profession='" + Profession + '\'' +
                 ", extension='" + extension + '\'' +
                 ", briefInfo='" + briefInfo + '\'' +
+                ", status='" + status + '\'' +
                 ", systemDate=" + systemDate +
                 '}';
     }

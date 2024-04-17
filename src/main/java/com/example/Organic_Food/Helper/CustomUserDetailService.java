@@ -43,6 +43,9 @@ public class CustomUserDetailService implements UserDetailsService {
             if (user.getUserType().equals("1")) {
                 System.out.println("admin");
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            } else if (user.getUserType().equals("2")) {
+                System.out.println("FARMER");
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_FARMER"));
             } else if (user.getUserType().equals("0")) {
                 System.out.println("user");
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));

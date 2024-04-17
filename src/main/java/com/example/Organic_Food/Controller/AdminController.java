@@ -8,9 +8,11 @@ import com.example.Organic_Food.Repo.*;
 import com.razorpay.Order;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.json.JSONObject;
 import com.razorpay.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,8 @@ import java.util.List;
 
 @Controller
 public class AdminController {
+    @Autowired
+    tCodeRepo tCodeRepo;
     @Autowired
     HttpSession session;
     @Autowired
@@ -52,10 +56,16 @@ public class AdminController {
     OrderPlacedRepo orderPlacedRepo;
 
     @GetMapping("/admin/product/report/")
-    public String getAddBlogPage(Model model) {
+    public String getProductReportPage(Model model) {
         List<Product> productList = productRepo.findAll();
         model.addAttribute("productList", productList);
         return "product_report";
+    }
+    @GetMapping("/review/report/")
+    public String getReviewReportPage(Model model) {
+        List<Review> reviewList = reviewRepo.findAll();
+        model.addAttribute("reviewList", reviewList);
+        return "review_report";
     }
 
     @GetMapping("/admin/product/delete/{id}/")
@@ -93,10 +103,12 @@ public class AdminController {
             iterator++;
 
         }
-        System.out.println(productId[0]);
+        System.out.println("Product id:-"+productId[0]);
         try {
+            System.out.println(productRepo.findProductPrizeById(productId[0]));
             productPrize[0] = productRepo.findProductPrizeById(productId[0]);
             Integer totalAmt = productPrize[0] * productQty[0];
+            System.out.println("Total amount:-"+totalAmt);
             model.addAttribute("productNames", productName);
             model.addAttribute("totalAmt", totalAmt);
             model.addAttribute("userId", userId);
@@ -108,6 +120,7 @@ public class AdminController {
 
         return Page;
     }
+
 
     @ResponseBody
     @PostMapping("/admin/passData/")
@@ -168,9 +181,9 @@ public class AdminController {
                 model.addAttribute("errorMsg", "Currently Stock Empty");
             }
         } else {
-            System.out.println("Data not found");
+            System.out.println("Data fnot found");
         }
-        session.invalidate();
+//        session.invalidate();
         return "Data get it";
 
     }
@@ -208,7 +221,7 @@ public class AdminController {
 //        return "Data get it";
 //    }
 
-    @PostMapping("/admin/add/order/details/")
+    @PostMapping("/user/add/order/details/")
     public String plasedOder(Model model, OrderPlased orderPlased) {
         OrderPlased plased = orderPlacedRepo.save(orderPlased);
         String invoiceNumber = orderPlacedRepo.findInvoiceIdByName(orderPlased.getCustName());
@@ -217,10 +230,25 @@ public class AdminController {
         List<String> productNameList = Arrays.asList(productNames);
         List<Integer> productIds = productRepo.findProductIdsByNames(productNameList);
         Product productList = productRepo.getReferenceById(productRepo.findProductIdByName(productNames[0]));
+        String userId=(String)session.getAttribute("key");
+        System.out.println(userId);
         model.addAttribute("productNames", productNames);
-        model.addAttribute("productQty", tempOrderRepo.findProductQtyByUserId("IT", productIds.get(0)));
-        model.addAttribute("productPrize", productList.getPrize());
 
+        System.out.println(tempOrderRepo.findProductQtyByUserId(userId, productIds.get(0)));
+        System.out.println("Payment type: "+orderPlased.getPaymentType());
+        System.out.println(orderPlased.getPaymentType());
+
+        model.addAttribute("productQty", tempOrderRepo.findProductQtyByUserId(userId, productIds.get(0)));
+        model.addAttribute("productPrize", productList.getPrize());
+        Product product=productRepo.getReferenceById(productIds.get(0));
+        if(product.getDiscount()>0)//product.getDiscount_YN().equals("1") || product.getDiscount_YN()==""
+        {
+            Integer totalDiscount=(100*product.getDiscount()/product.getPrize());
+            System.out.println("Total discount:-"+totalDiscount);
+            model.addAttribute("discount", totalDiscount);
+        }
+
+        model.addAttribute("buyerHomeAddress", orderPlased.getHomeAddress());
         model.addAttribute("buyerHomeAddress", orderPlased.getHomeAddress());
         model.addAttribute("systemDate", orderPlased.getSystemDate());
         model.addAttribute("status", orderPlased.getPaymentType());
@@ -229,7 +257,7 @@ public class AdminController {
         model.addAttribute("custName", plased.getCustName());
         return "invoice";
     }
-
+    @Transactional
     @ResponseBody
     @PostMapping("/admin/payment_order/")
     public String handlePostRequestOfSeatCount(Model model, @RequestBody String amountEntered) throws RazorpayException {
@@ -242,13 +270,15 @@ public class AdminController {
         String message="work in progress!";
 
         for (String i:productsNamesArray) {
+            System.out.println("Product id:-"+ productRepo.findProductIdsByName(i));
             Integer productId=productRepo.findProductIdsByName(i);
+            Product product=productRepo.getReferenceById(productId);
             Integer toProcureQty=tempOrderRepo.findProductQtyByUserId(userId,productId);
             Integer actualStock=productRepo.findActualStockById(productId);
             if(actualStock>=toProcureQty)
             {
                 Integer remainStock=actualStock-toProcureQty;
-                Product data=new Product(productId,remainStock);
+                Product data=new Product(productId,product.getCategory(),product.getName(),product.getTitle(),product.getMnf_date(),product.getExp_date(),product.getUnit(),product.getPrize(),product.getDiscount_YN(),product.getDiscount(),remainStock,product.getExtension(),product.getBrief_info(),product.getProd_name(),product.getProd_add(),product.getProd_mob_number(),product.getSystemDateTime());
                 productRepo.save(data);
                 List<ProductStock> productStockList=productStockRepo.findProductStockByProductId(productId);
                 for (ProductStock productStock : productStockList) {
@@ -258,6 +288,7 @@ public class AdminController {
                     Integer closingQty = actualStock-toProcureQty;
                     LocalDateTime systemDate = LocalDateTime.now();
                     ProductStock productStockUpdated = new ProductStock(productStock.getId(),productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+                    productStockRepo.save(productStockUpdated);
                     tempOrderRepo.deleteByUserIdAndProductId(userId,productId);
                 }
             }
@@ -291,10 +322,27 @@ public class AdminController {
     @PostMapping("/new/user/registration/")
     public String addUser(Model model, Registration registration) {
         Registration registrationList = registrationRepo.getByEmail(registration.getEmail());
+
         System.out.println(registrationList);
         if (registrationList == null) {
-            Registration registration1 = registrationRepo.save(registration);
-            model.addAttribute("msg", "New User Register Successfully");
+            tCode code= tCodeRepo.getReferenceById(1);
+            System.out.println(code);
+            if(registration.getUserType().equals("1"))
+            {
+                if(registration.gettCode().equals(code.gettCodeValue()))
+                {
+                    Registration registration1 = registrationRepo.save(registration);
+                    model.addAttribute("msg", "Admin Registered Successfully");
+                }
+                else{
+                    model.addAttribute("emsg", "You are not an Admin");
+                }
+            }
+            else{
+                Registration registration1 = registrationRepo.save(registration);
+                model.addAttribute("msg", "New User Registration done Successfully");
+            }
+
         } else {
             model.addAttribute("emsg", "User Already Exist");
         }
@@ -390,5 +438,36 @@ public class AdminController {
         session.invalidate();
         return "index";
     }
+
+    @GetMapping("/admin/review/status/update/{id}/")
+    public String updateAdmittedStatus(Model model, @PathVariable Integer id) {
+        String status = "";
+        Review reviewRecord = reviewRepo.getReferenceById(id);
+        if (reviewRecord.getStatus() == null || reviewRecord.getStatus().equals("0")) {
+            status = "1";
+        } else {
+            status = "0";
+        }
+        reviewRepo.save(new Review(reviewRecord.getId(),reviewRecord.getName(),reviewRecord.getProfession(),reviewRecord.getExtension(),reviewRecord.getBriefInfo(),status,reviewRecord.getSystemDate()));
+        List<Review> reviewList = reviewRepo.findAll();
+        model.addAttribute("reviewList", reviewList);
+        return "review_report";
+    }
+    @GetMapping("/admin/review/update/{id}/")
+    public String updateReviewRecord(@PathVariable Integer id, Model model)
+    {
+        Review data=reviewRepo.getReferenceById(id);
+        model.addAttribute("data",data);
+        return "add_review";
+    }
+    @GetMapping("/admin/review/delete/{id}/")
+    public String deleteReviewRecord(@PathVariable Integer id, Model model)
+    {
+        reviewRepo.deleteById(id);
+        List<Review> reviewList=reviewRepo.findByStatus("1");
+        model.addAttribute("reviewList",reviewList);
+        return "review_report";
+    }
+
 
 }

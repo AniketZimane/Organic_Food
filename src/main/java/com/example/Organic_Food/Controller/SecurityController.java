@@ -23,6 +23,11 @@ public class SecurityController
         {
             return "redirect:/";
         }
+        else if (request.isUserInRole("ROLE_FARMER"))
+        {
+            return "redirect:/dashboard/";
+        }
+
         // similarly you can check for other designations like manager, analyst etc
 
         return "redirect:/";
