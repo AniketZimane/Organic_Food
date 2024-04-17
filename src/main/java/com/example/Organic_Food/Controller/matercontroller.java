@@ -3,6 +3,7 @@ package com.example.Organic_Food.Controller;
 import com.example.Organic_Food.Entity.*;
 import com.example.Organic_Food.Helper.FileUploader;
 import com.example.Organic_Food.Repo.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,13 +32,17 @@ public class matercontroller {
     FileUploader uploader;
     @Autowired
     ProductStockRepo productStockRepo;
+    @Autowired
+    RegistrationRepo registrationRepo;
+    @Autowired
+    HttpSession session;
 
     @GetMapping("/")
     public String getMainPage(Model model)
     {
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         List<Feature> featureList=featureRepo.findAll();
         model.addAttribute("featureList",featureList);
         model.addAttribute("productList",productList);
@@ -57,7 +62,9 @@ public class matercontroller {
     }
 
     @GetMapping("/review/")
-    public String getAddReview(){
+    public String getAddReview(Model model){
+        System.out.println(registrationRepo.findUserTypeByUsername((String)session.getAttribute("key")));
+        model.addAttribute("UserType",registrationRepo.findUserTypeByUsername((String)session.getAttribute("key")));
         return "add_review";
     }
 
@@ -111,7 +118,7 @@ public class matercontroller {
         System.out.println("Data saved..");
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         List<Feature> featureList=featureRepo.findAll();
         model.addAttribute("featureList",featureList);
         model.addAttribute("productList",productList);
@@ -135,7 +142,7 @@ public class matercontroller {
         System.out.println("Data saved..");
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         List<Feature> featureList=featureRepo.findAll();
         model.addAttribute("featureList",featureList);
         model.addAttribute("productList",productList);
@@ -159,7 +166,7 @@ public class matercontroller {
         System.out.println("Data saved..");
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         model.addAttribute("productList",productList);
         model.addAttribute("blogList",blogList);
         model.addAttribute("reviewList",reviewList);
@@ -181,7 +188,7 @@ public class matercontroller {
         System.out.println("Data saved..");
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         List<Feature> featureList=featureRepo.findAll();
         model.addAttribute("featureList",featureList);
         model.addAttribute("productList",productList);
@@ -195,7 +202,7 @@ public class matercontroller {
     {
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         model.addAttribute("productList",productList);
         model.addAttribute("blogList",blogList);
         model.addAttribute("reviewList",reviewList);
@@ -221,7 +228,7 @@ public class matercontroller {
     {
         List<Product> productList=productRepo.findAll();
         List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        List<Review> reviewList=reviewRepo.findByStatus("1");
         model.addAttribute("productList",productList);
         model.addAttribute("blogList",blogList);
         model.addAttribute("reviewList",reviewList);
