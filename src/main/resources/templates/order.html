@@ -38,8 +38,8 @@
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Name*</label><input class="form-control" type="text" name="custName" placeholder="Enter Your Name" th:value="${userId}" readonly></div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;">
                             <label class="form-label fw-bold">Product Titles*</label>
-                            <input class="form-control" type="text" name="buyProductName" required="" placeholder="Product Title"
-                                   th:value="${#strings.arrayJoin(productNames, ',')}" readonly>
+<!--                             <input class="form-control" type="text" name="buyProductName" required="" placeholder="Product Title"
+                                   th:value="${#strings.arrayJoin(productNames, ',')}" readonly> -->
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Total Amount*</label><input class="form-control" type="number" placeholder="Enter Value In Percentage" name="totalAmt" th:value="${totalAmt}" required="" readonly></div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="text" name="mobNO" placeholder="Mobile Number" required="" pattern="^\d{10}$"></div>
