@@ -104,14 +104,13 @@ public class AdminController {
             iterator++;
 
         }
-        System.out.println("Product id:-"+productId[0]);
+        System.out.println("Product name:-"+productName[0]);
         try {
             System.out.println(productRepo.findProductPrizeById(productId[0]));
             productPrize[0] = productRepo.findProductPrizeById(productId[0]);
             Integer totalAmt = productPrize[0] * productQty[0];
             System.out.println("Total amount:-"+totalAmt);
-            model.addAttribute("productNames", productName);
-            System.out.println("Product Names:-"+productName);
+            model.addAttribute("productNames", productName[0]);
             model.addAttribute("totalAmt", totalAmt);
             System.out.println("User Id:-"+userId);
             model.addAttribute("userId", userId);
