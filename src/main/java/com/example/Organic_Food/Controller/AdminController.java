@@ -99,7 +99,7 @@ public class AdminController {
         for (Temp_order data : tempOrders) {
             productId[iterator] = data.getProductId();
             productQty[iterator] = data.getProductQty();
-            productName[iterator] = productRepo.findProductNameById(productId[0]);
+            productName[iterator] = productRepo.findProductNameById(data.getProductId());
             userId = data.getUserId();
             iterator++;
 
@@ -110,7 +110,7 @@ public class AdminController {
             productPrize[0] = productRepo.findProductPrizeById(productId[0]);
             Integer totalAmt = productPrize[0] * productQty[0];
             System.out.println("Total amount:-"+totalAmt);
-            model.addAttribute("productNames", productName[0]);
+            model.addAttribute("productNames", "POTATO");
             model.addAttribute("totalAmt", totalAmt);
             System.out.println("User Id:-"+userId);
             model.addAttribute("userId", userId);
