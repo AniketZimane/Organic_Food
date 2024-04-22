@@ -99,7 +99,7 @@ public class AdminController {
         for (Temp_order data : tempOrders) {
             productId[iterator] = data.getProductId();
             productQty[iterator] = data.getProductQty();
-            productName[iterator] = productRepo.findProductNameById(data.getProductId());
+            productName[iterator] = productRepo.findProductNameById(productId[0]);
             userId = data.getUserId();
             iterator++;
 
