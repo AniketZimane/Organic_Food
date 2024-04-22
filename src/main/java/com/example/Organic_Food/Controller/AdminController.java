@@ -110,7 +110,9 @@ public class AdminController {
             Integer totalAmt = productPrize[0] * productQty[0];
             System.out.println("Total amount:-"+totalAmt);
             model.addAttribute("productNames", productName);
+            System.out.println("Product Names:-"+productName);
             model.addAttribute("totalAmt", totalAmt);
+            System.out.println("User Id:-"+userId);
             model.addAttribute("userId", userId);
 
         } catch (Exception e) {
