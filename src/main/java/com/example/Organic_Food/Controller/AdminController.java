@@ -270,13 +270,15 @@ public class AdminController {
         String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
         String[] productsNamesArray = productNames.split(",");
         String message="work in progress!";
-
+        System.out.println("product names:-"+ productsNamesArray);
         for (String i:productsNamesArray) {
             System.out.println("Product id:-"+ productRepo.findProductIdsByName(i));
             Integer productId=productRepo.findProductIdsByName(i);
             Product product=productRepo.getReferenceById(productId);
             Integer toProcureQty=tempOrderRepo.findProductQtyByUserId(userId,productId);
             Integer actualStock=productRepo.findActualStockById(productId);
+            System.out.println("actual stock:-"+ actualStock);
+            System.out.println("to producre qty stock:-"+ toProcureQty);
             if(actualStock>=toProcureQty)
             {
                 Integer remainStock=actualStock-toProcureQty;
