@@ -11,7 +11,7 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface ProductRepo extends JpaRepository<Product,Integer> {
-    @Query("SELECT p.stock FROM Product p WHERE p.id = :id")
+   @Query("SELECT p.stock FROM Product p WHERE p.id = :id")
     Integer findActualStockById(@Param("id") Integer id);
     @Query("SELECT p.prize FROM Product p WHERE p.id = :id")
     Integer findProductPrizeById(@Param("id") Integer id);
