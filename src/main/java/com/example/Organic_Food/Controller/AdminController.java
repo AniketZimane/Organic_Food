@@ -93,7 +93,7 @@ public class AdminController {
         Integer tempOrderLength = tempOrders.size();
         String[] productName = new String[tempOrderLength];
         String userId = null;
-        String Page = "Order";
+        String Page = "order";
         int iterator = 0;
         System.out.println("ordesr details:-"+tempOrders);
         for (Temp_order data : tempOrders) {
