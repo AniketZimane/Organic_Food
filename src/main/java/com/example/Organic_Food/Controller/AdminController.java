@@ -95,7 +95,6 @@ public class AdminController {
         String userId = null;
         String Page = "Order";
         int iterator = 0;
-        System.out.println(tempOrders);
         for (Temp_order data : tempOrders) {
             productId[iterator] = data.getProductId();
             productQty[iterator] = data.getProductQty();
@@ -104,15 +103,15 @@ public class AdminController {
             iterator++;
 
         }
-        System.out.println("Product name:-"+productName[0]);
+        System.out.println("Product id:-"+productId[0]);
         try {
             System.out.println(productRepo.findProductPrizeById(productId[0]));
             productPrize[0] = productRepo.findProductPrizeById(productId[0]);
             Integer totalAmt = productPrize[0] * productQty[0];
             System.out.println("Total amount:-"+totalAmt);
-            model.addAttribute("productNames", "POTATO");
+            
+            model.addAttribute("productNames", productName);
             model.addAttribute("totalAmt", totalAmt);
-            System.out.println("User Id:-"+userId);
             model.addAttribute("userId", userId);
 
         } catch (Exception e) {
