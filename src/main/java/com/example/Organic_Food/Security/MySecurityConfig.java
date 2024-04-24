@@ -35,7 +35,7 @@ public class MySecurityConfig
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/user_assest/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/user/order/","/new/user/registration/","/user/add/order/details/","/oder/placed/","/admin/payment_order/","/add/product/").permitAll()
-                .requestMatchers("/product/","/feature/","/blog/","/add/feature/","/add/product/","/dashboard/","/scheme/","/add/scheme/","/admin/review/status/update/*","/review/report/","/admin/review/update/*","/admin/review/delete/*").hasRole("ADMIN")
+                .requestMatchers("/product/","/feature/","/blog/","/add/feature/","/add/product/","/dashboard/","/scheme/","/add/scheme/","/admin/review/status/update/*","/review/report/","/admin/review/update/*","/admin/review/delete/*","/admin/product/report/").hasRole("ADMIN")
                 .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/add/to/card/*","/admin/payment_order/","/review/","/add/review/","/payment/").hasRole("USER")
                 .requestMatchers("/dashboard/").hasRole("FARMER")
                 .anyRequest()
