@@ -95,6 +95,7 @@ public class AdminController {
         String userId = null;
         String Page = "Order";
         int iterator = 0;
+        System.out.println("ordesr details:-"+tempOrders);
         for (Temp_order data : tempOrders) {
             productId[iterator] = data.getProductId();
             productQty[iterator] = data.getProductQty();
