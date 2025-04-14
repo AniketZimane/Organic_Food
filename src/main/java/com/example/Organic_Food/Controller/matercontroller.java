@@ -193,21 +193,24 @@ public class matercontroller {
     @GetMapping("/add/to/card/{id}/")
     public String addToCardPage(@PathVariable int id, Model model)
     {
-        List<Product> productList=productRepo.findAll();
-        List<Blog> blogList=blogRepo.findAll();
-        List<Review> reviewList=reviewRepo.findAll();
+        // List<Product> productList=productRepo.findAll();
+        // List<Blog> blogList=blogRepo.findAll();
+        // List<Review> reviewList=reviewRepo.findAll();
+        // model.addAttribute("productList",productList);
+        // model.addAttribute("blogList",blogList);
+        // model.addAttribute("reviewList",reviewList);
+        // if(productId.contains(id))
+        // {
+        //     model.addAttribute("emsg","This product is already added!");
+        // }
+        // else{
+        //     productId.add(id);
+        //     System.out.println(productId);
+        // }
+        List<Product> productList=productRepo.findAllById(id);
         model.addAttribute("productList",productList);
-        model.addAttribute("blogList",blogList);
-        model.addAttribute("reviewList",reviewList);
-        if(productId.contains(id))
-        {
-            model.addAttribute("emsg","This product is already added!");
-        }
-        else{
-            productId.add(id);
-            System.out.println(productId);
-        }
-        return "index";
+        model.addAttribute("productId",id);
+        return "addToCart";
     }
     @GetMapping("/addtocart/")
     public String addToCardPage(Model model){
