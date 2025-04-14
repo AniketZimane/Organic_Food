@@ -216,17 +216,18 @@
                                     <small class="w-50 text-center border-end py-2">
 <!--                                        <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>-->
                                         <label class="form-label fw-bold">Select Qty*</label>
-                                        <div style="position: relative; display: inline-block; border-radius: 20px; overflow: hidden; border: 2px solid #ccc;">
-                                            <select onchange="handleSelectChange(this)" style="padding: 10px; width: 100px; border: none; outline: none; background: transparent;" th:each="product : ${prodList}">
-                                                <option th:each="i : ${#numbers.sequence(1, product.stock)}"
-                                                        th:value="${i}" th:text="${i + ' kg'}"></option>
-<!--                                                <option style="padding: 10px; border-radius: 20px;" value="2">2 Kg</option>-->
-<!--                                                <option style="padding: 10px; border-radius: 20px;" value="5">5 Kg</option>-->
-<!--                                                <option style="padding: 10px; border-radius: 20px;" value="10">10 Kg</option>-->
-                                            </select>
-                                            <span th:if="${errorMsg}"><p th:text="${errorMsg}" style="color: red;"></p></span>
-                                            <div style="content: '\25BC'; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></div>
+                                        <div th:each="product : ${prodList}" style="margin-bottom: 20px;">
+                                            <div style="position: relative; display: inline-block; border-radius: 20px; overflow: hidden; border: 2px solid #ccc;">
+                                                <select onchange="handleSelectChange(this)" style="padding: 10px; width: 100px; border: none; outline: none; background: transparent;">
+                                                    <option th:each="i : ${#numbers.sequence(1, product.stock)}"
+                                                            th:value="${i}"
+                                                            th:text="${i + ' ' + product.unit}"></option>
+                                                </select>
+                                                <span th:if="${errorMsg}"><p th:text="${errorMsg}" style="color: red;"></p></span>
+                                                <div style="content: '\25BC'; position: absolute; top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></div>
+                                            </div>
                                         </div>
+
                                     </small>
                                     <small class="w-50 text-center py-2">
                                         <a class="text-body" th:href="@{/remove/to/card/{id}/(id = ${prodList.id})}"><i class="fa fa-shopping-bag text-primary me-2"></i>Remove</a><br>
