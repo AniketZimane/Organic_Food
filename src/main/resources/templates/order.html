@@ -43,8 +43,9 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Total Amount*</label><input class="form-control" type="number" placeholder="Enter Value In Percentage" name="totalAmt" th:value="${totalAmt}" required="" readonly></div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile number:</label><input class="form-control" type="text" name="mobNO" placeholder="Mobile Number" required="" pattern="^\d{10}$"></div>
-                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Select Payment Type*</label><select class="form-select" name="paymentType" required="">
-                                <option selected="">Select Payment Type</option>
+                        <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Select Payment Type*</label>
+                            <select class="form-select" name="paymentType" required="">
+                                <option disabled selected>Select Payment Type</option>
                                 <option value="1">UPI</option>
                                 <option value="2">Cash on Delivery</option>
                             </select></div>

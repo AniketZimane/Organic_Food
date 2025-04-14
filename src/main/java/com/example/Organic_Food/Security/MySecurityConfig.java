@@ -34,10 +34,10 @@ public class MySecurityConfig
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/user_assest/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/new/user/registration/","/user/add/order/details/","/oder/placed/","/admin/payment_order/","/add/product/").permitAll()
+                .requestMatchers("/user_assest/**","/assetsFarmar/**", "/","/login/","/admin_assest/**","/admin_assest_bill/**","/master/login/","/data/pass/controller/","/new/user/registration/","/user/add/order/details/","/oder/placed/","/admin/payment_order/","/add/product/","/get/plan/","/get/myorder/").permitAll()
                 .requestMatchers("/product/","/feature/","/blog/","/add/feature/","/add/product/","/dashboard/","/scheme/","/add/scheme/","/admin/review/status/update/*","/review/report/","/admin/review/update/*","/admin/review/delete/*").hasRole("ADMIN")
-                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/user/order/","/add/to/card/*","/user/order/","/admin/payment_order/","/review/","/add/review/","/payment/").hasRole("USER")
-                .requestMatchers("/dashboard/").hasRole("FARMER")
+                .requestMatchers("/add/product/**","/","/addtocart/","/add/to/card/**","/generate/order/","/add/to/card/*","/generate/order/","/admin/payment_order/","/review/","/add/review/","/payment/").hasRole("USER")
+                .requestMatchers("/farmer/dashboard/").hasRole("FARMER")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -60,7 +60,7 @@ public class MySecurityConfig
     @Bean
     public AuthenticationProvider daoAuthenticationProvider()
     {
-        System.out.println("My user details service ");
+
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());

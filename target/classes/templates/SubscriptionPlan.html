@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Farming Subscription Plans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+<div class="container mx-auto px-4 py-12">
+    <!-- Header -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-green-800 mb-4">Organic Farming Subscription Plans</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Choose the perfect plan for your needs. Fresh, organic produce delivered regularly.</p>
+    </div>
+
+    <!-- Tabs for different user types -->
+    <div class="flex justify-center mb-12">
+        <div class="inline-flex rounded-md shadow-sm" role="group">
+            <button type="button" class="px-6 py-3 text-sm font-medium text-green-700 bg-green-100 rounded-l-lg hover:bg-green-200 focus:z-10 focus:ring-2 focus:ring-green-500">
+                Farmers (Sindhudurg/Konkan)
+            </button>
+            <button type="button" class="px-6 py-3 text-sm font-medium text-gray-900 bg-white hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-green-500">
+                Hotels & Restaurants
+            </button>
+            <button type="button" class="px-6 py-3 text-sm font-medium text-gray-900 bg-white rounded-r-md hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-green-500">
+                Departmental Stores
+            </button>
+        </div>
+    </div>
+
+    <!-- Pricing Plans -->
+    <div class="grid md:grid-cols-3 gap-8">
+        <!-- Farmer Plan -->
+        <div class="relative bg-white rounded-lg shadow-lg overflow-hidden border-2 border-green-200 transform hover:scale-105 transition duration-300">
+            <div class="absolute top-0 right-0 bg-green-600 text-white px-3 py-1 text-xs font-semibold rounded-bl-lg">POPULAR</div>
+            <div class="p-8">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-tractor text-3xl text-green-600 mr-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Farmer Basic</h3>
+                </div>
+                <p class="text-gray-600 mb-6">Ideal for small-scale organic farmers in Sindhudurg/Konkan region</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-green-700">₹499</span>
+                    <span class="text-gray-500">/month</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Marketplace access</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Organic certification guidance</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Weekly training webinars</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Direct buyer connections</span>
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <i class="fas fa-times text-red-400 mr-2"></i>
+                        <span>Premium buyer network</span>
+                    </li>
+                </ul>
+                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+                    Choose Plan
+                </button>
+            </div>
+        </div>
+
+        <!-- Hotel/Restaurant Plan -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-gray-100 transform hover:scale-105 transition duration-300">
+            <div class="p-8">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-utensils text-3xl text-yellow-600 mr-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Hotel Premium</h3>
+                </div>
+                <p class="text-gray-600 mb-6">For hotels & restaurants wanting regular organic supplies</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-yellow-700">₹2,999</span>
+                    <span class="text-gray-500">/month</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Weekly organic produce delivery</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Customized order planning</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Priority farmer network</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Organic certification display</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>24/7 support</span>
+                    </li>
+                </ul>
+                <button class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+                    Choose Plan
+                </button>
+            </div>
+        </div>
+
+        <!-- Departmental Store Plan -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden border-2 border-blue-100 transform hover:scale-105 transition duration-300">
+            <div class="p-8">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-store text-3xl text-blue-600 mr-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-800">Store Enterprise</h3>
+                </div>
+                <p class="text-gray-600 mb-6">For departmental stores with multiple locations</p>
+                <div class="mb-6">
+                    <span class="text-4xl font-bold text-blue-700">₹5,999</span>
+                    <span class="text-gray-500">/month</span>
+                </div>
+                <ul class="space-y-3 mb-8">
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Bulk organic produce supply</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Multi-location delivery</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>White-label packaging</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Inventory management tools</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Dedicated account manager</span>
+                    </li>
+                </ul>
+                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+                    Choose Plan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="mt-20 bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6 border-b">
+            <h2 class="text-2xl font-bold text-gray-800">Plan Comparison</h2>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                <tr class="bg-gray-50 text-left text-gray-600">
+                    <th class="p-4 font-medium">Features</th>
+                    <th class="p-4 font-medium">Farmer Basic</th>
+                    <th class="p-4 font-medium">Hotel Premium</th>
+                    <th class="p-4 font-medium">Store Enterprise</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                <tr>
+                    <td class="p-4 font-medium">Monthly Price</td>
+                    <td class="p-4">₹499</td>
+                    <td class="p-4">₹2,999</td>
+                    <td class="p-4">₹5,999</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="p-4 font-medium">Delivery Frequency</td>
+                    <td class="p-4">-</td>
+                    <td class="p-4">Weekly</td>
+                    <td class="p-4">Daily</td>
+                </tr>
+                <tr>
+                    <td class="p-4 font-medium">Organic Certification</td>
+                    <td class="p-4"><i class="fas fa-check text-green-500"></i></td>
+                    <td class="p-4"><i class="fas fa-check text-green-500"></i></td>
+                    <td class="p-4"><i class="fas fa-check text-green-500"></i></td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="p-4 font-medium">Dedicated Support</td>
+                    <td class="p-4"><i class="fas fa-times text-red-400"></i></td>
+                    <td class="p-4"><i class="fas fa-check text-green-500"></i></td>
+                    <td class="p-4"><i class="fas fa-check text-green-500"></i></td>
+                </tr>
+                <tr>
+                    <td class="p-4 font-medium">Bulk Order Discount</td>
+                    <td class="p-4"><i class="fas fa-times text-red-400"></i></td>
+                    <td class="p-4">10%</td>
+                    <td class="p-4">15%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-20">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-xl font-semibold text-green-700 mb-3">How does the farmer subscription work?</h3>
+                <p class="text-gray-600">Our farmer subscription provides Sindhudurg/Konkan farmers with access to organic farming resources, market connections, and certification support to help you grow and sell your organic produce effectively.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-xl font-semibold text-yellow-700 mb-3">Can hotels customize their orders?</h3>
+                <p class="text-gray-600">Yes, our hotel premium plan includes customized order planning based on your menu requirements and seasonal availability of organic produce.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Is there a contract for departmental stores?</h3>
+                <p class="text-gray-600">We offer flexible monthly contracts for departmental stores with no long-term commitment required. You can cancel or modify your plan anytime.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-xl font-semibold text-green-700 mb-3">How do payments work?</h3>
+                <p class="text-gray-600">All subscriptions are billed monthly in advance. We accept all major credit cards, UPI, and net banking for your convenience.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

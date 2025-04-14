@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,6 +23,8 @@ public class matercontroller {
     ArrayList<Integer> productId=new ArrayList<Integer>();
     @Autowired
     ProductRepo productRepo;
+    @Autowired
+    OrderPlacedRepo orderPlacedRepo;
     @Autowired
     ReviewRepo reviewRepo;
     @Autowired
@@ -84,15 +87,17 @@ public class matercontroller {
     }
 
     @PostMapping("/add/product/")
-    public String addNewProduct(Model model, Product addProd, MultipartFile file)
+    public RedirectView addNewProduct(Model model, Product addProd, MultipartFile file)
     {
         System.out.println(addProd.getId());
+        String fileNameOld="";
+        String extension="";
         if(addProd.getId()==null)
         {
-            String fileNameOld = file.getOriginalFilename();
-            String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
+            fileNameOld = file.getOriginalFilename();
+            extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
+            System.out.println("extension: "+extension);
             addProd.setExtension(extension);
-
             Product product = productRepo.save(addProd);
             String fileNameNew = product.getId() + "." + extension;
 
@@ -107,7 +112,9 @@ public class matercontroller {
         else{
             try{
                 LocalDateTime date=LocalDateTime.now();
-                productRepo.save(new Product(addProd.getId(),addProd.getCategory(),addProd.getName(),addProd.getTitle(),addProd.getMnf_date(),addProd.getExp_date(),addProd.getUnit(),addProd.getPrize(),addProd.getDiscount_YN(),addProd.getDiscount(),addProd.getStock(),addProd.getExtension(),addProd.getBrief_info(),addProd.getProd_name(),addProd.getProd_add(),addProd.getProd_mob_number(),date));
+                fileNameOld = file.getOriginalFilename();
+                extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
+                productRepo.save(new Product(addProd.getId(),addProd.getCategory(),addProd.getName(),addProd.getTitle(),addProd.getMnf_date(),addProd.getExp_date(),addProd.getUnit(),addProd.getPrize(),addProd.getDiscount_YN(),addProd.getDiscount(),addProd.getStock(), extension,addProd.getBrief_info(),addProd.getProd_name(),addProd.getProd_add(),addProd.getProd_mob_number(),date));
                 model.addAttribute("msg","Product Updated successfully!");
             }catch (Exception e)
             {
@@ -124,7 +131,7 @@ public class matercontroller {
         model.addAttribute("productList",productList);
         model.addAttribute("blogList",blogList);
         model.addAttribute("reviewList",reviewList);
-        return "index";
+        return new RedirectView("/");
     }
 
     @PostMapping("/add/blog/")
@@ -243,6 +250,9 @@ public class matercontroller {
                 model.addAttribute("msg","You should have to add new product in your cart!");
             }
             else{
+                List<Product> productList1=productRepo.findAllById(productId);
+                model.addAttribute("productList",productList1);
+                model.addAttribute("productId",productId);
                 model.addAttribute("msg","Product Remove Successfully!");
                 page="addToCart";
             }
@@ -250,10 +260,37 @@ public class matercontroller {
         }
         else{
             model.addAttribute("emsg","Product already Remove Successfully!");
+            List<Product> productList1=productRepo.findAllById(productId);
+            model.addAttribute("productList",productList1);
+            model.addAttribute("productId",productId);
             page="addToCart";
             System.out.println(productId);
         }
         return page;
+    }
+
+    @GetMapping("/farmer/dashboard/")
+    public String getFarmerDashboardPage(Model model)
+    {
+        return "Farmer_dashboard";
+    }
+
+    @GetMapping("/order/status/")
+    public String getStatusOfOrder(Model model)
+    {
+        List<OrderPlased> orderPlasedsData=orderPlacedRepo.findAll();
+        model.addAttribute("order",orderPlasedsData);
+        return "OrderStatus";
+    }
+    @GetMapping("/get/plan/")
+    public String getsubScriptionPlan()
+    {
+        return "SubscriptionPlan";
+    }
+    @GetMapping("/get/myorder/")
+    public String getMyOrder()
+    {
+        return "MyOrder";
     }
 
 }

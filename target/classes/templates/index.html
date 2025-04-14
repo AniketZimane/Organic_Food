@@ -101,8 +101,8 @@
                             <a href="#Testimonial" class="dropdown-item">Testimonial</a>
                             <a href="/review/" class="dropdown-item">Upload Your Review</a>
                             <a href="/addtocart/" class="dropdown-item">Add to cart</a>
+                            <a href="/get/myorder/" class="dropdown-item">My order</a>
                             <a href="/logout" class="dropdown-item">Log out</a>
-                            <a href="#" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
                     <a href="#footer" class="nav-item nav-link">Contact Us</a>
@@ -150,8 +150,8 @@
                             <div class="row justify-content-start">
                                 <div class="col-lg-7">
                                     <h1 class="display-2 mb-5 animated slideInDown">Natural Food Is Always Healthy</h1>
-                                    <a href="" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                                    <a href="" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                    <a href="#product" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
+                                    <a href="#features" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="prodList : ${productList}">
                             <div class="product-item">
                                 <div class="position-relative bg-light overflow-hidden">
-                                    <img class="img-fluid w-100" th:src="@{admin_assest/img/Product_img/{fileName}/(fileName = ${prodList.id + '.' + prodList.extension})}" alt="img not found">
+                                    <img class="img-fluid w-100" th:src="@{/admin_assest/img/Product_img/{fileName}/(fileName = ${prodList.id + '.' + prodList.extension})}" alt="img not found">
 <!--                                    <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>-->
 <!--                                    <div th:if="${prodData.systemDate != null and prodData.systemDate.year == #dates.year(#now) and prodData.systemDate.month == #dates.months(#now) and prodData.systemDate.dayOfMonth == #dates.days(#now)}"-->
 <!--                                         class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">-->
@@ -364,8 +364,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
-                    <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, Kudal, Sindhudurg</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Kudal, Sindhudurg</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+91 7843032765</p>
                     <p><i class="fa fa-envelope me-3"></i>ad.developer1604@gmail.com</p>
                 </div>
                 <div class="col-lg-3 col-md-6">

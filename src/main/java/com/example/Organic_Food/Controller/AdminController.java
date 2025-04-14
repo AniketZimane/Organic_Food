@@ -84,7 +84,7 @@ public class AdminController {
         return "add_product";
     }
 
-    @GetMapping("/user/order/")
+    @GetMapping("/generate/order/")
     public String orderPage(Model model) {
         List<Temp_order> tempOrders = tempOrderRepo.findAll();
         Integer[] productId = new Integer[1000];
@@ -93,7 +93,7 @@ public class AdminController {
         Integer tempOrderLength = tempOrders.size();
         String[] productName = new String[tempOrderLength];
         String userId = null;
-        String Page = "Order";
+        String Page = "order";
         int iterator = 0;
         for (Temp_order data : tempOrders) {
             productId[iterator] = data.getProductId();
@@ -109,6 +109,7 @@ public class AdminController {
             productPrize[0] = productRepo.findProductPrizeById(productId[0]);
             Integer totalAmt = productPrize[0] * productQty[0];
             System.out.println("Total amount:-"+totalAmt);
+            System.out.println("product name"+productName[0].toString());
             model.addAttribute("productNames", productName);
             model.addAttribute("totalAmt", totalAmt);
             model.addAttribute("userId", userId);
@@ -299,7 +300,7 @@ public class AdminController {
         }
         RazorpayClient razorpay = null;
         try {
-            razorpay = new RazorpayClient("rzp_test_61WqW2hrEvrGTv", "9EkJKA7v7OH4qWphUMtQTrEJ");
+            razorpay = new RazorpayClient("rzp_test_8ugSEEjUVgI8ii", "ikXyWe5uh9zLk9LfGiVggTcb");
         } catch (RazorpayException e) {
             throw new RuntimeException(e);
         }
