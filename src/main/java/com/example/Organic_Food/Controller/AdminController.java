@@ -244,7 +244,7 @@ public class AdminController {
         Product product=productRepo.getReferenceById(productIds.get(0));
         if(product.getDiscount()>0)//product.getDiscount_YN().equals("1") || product.getDiscount_YN()==""
         {
-            Integer totalDiscount=(100*product.getDiscount()/product.getPrize());
+            Float totalDiscount = product.getPrize().floatValue() * product.getDiscount().floatValue() / 100;
             System.out.println("Total discount:-"+totalDiscount);
             model.addAttribute("discount", totalDiscount);
         }
@@ -264,7 +264,7 @@ public class AdminController {
     public String handlePostRequestOfSeatCount(Model model, @RequestBody String amountEntered) throws RazorpayException {
         String arr[] = amountEntered.split("=");
         System.out.println(arr[0]);
-        int amt = Integer.parseInt(arr[0]);
+        float amt = Float.parseFloat(arr[0]);
         String userId=(String)session.getAttribute("key");
         String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
         String[] productsNamesArray = productNames.split(",");
