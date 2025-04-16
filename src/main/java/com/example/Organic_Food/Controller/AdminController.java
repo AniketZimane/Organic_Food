@@ -323,8 +323,6 @@ public class AdminController {
     @PostMapping("/new/user/registration/")
     public String addUser(Model model, Registration registration) {
         Registration registrationList = registrationRepo.getByEmail(registration.getEmail());
-
-        System.out.println(registrationList);
         if (registrationList == null) {
             tCode code= tCodeRepo.getReferenceById(1);
             System.out.println(code);
