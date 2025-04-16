@@ -41,68 +41,84 @@
       });
 
         const paymentStart = () => {
-          console.log("Payment started");
-          let amountEntered = parseFloat(document.getElementById("totalAmt").innerText);
-          let username = document.getElementById("username").value;
-          console.log(amountEntered);
+  console.log("Payment started");
 
-          var endpoint = "/admin/payment_order/";
-          console.log(amountEntered);
+  // Disable the print button initially
+  const printBtn = document.getElementById("print_link");
+  printBtn.classList.add("disabled");
+  printBtn.style.pointerEvents = "none";
+  printBtn.style.opacity = "0.6";
 
-          axios.post(endpoint, amountEntered)
-            .then(function(response) {
-                console.log(response.data)
-                console.log(response.status)
-              if (response.status ===200) {
-                console.log("Execute")
-                let options = {
-                  key: 'rzp_live_VTbX2CR6tMQPqz',
-                  amount: response.data.amount,
-                  currency: 'INR',
-                  name: 'SindhuKonkan',
-                  description: 'Payment',
-                  image: '/admin_assest/img/organic_food_logo.jpg',
-                  order_id: response.data.id,
-                  handler: function(response) {
-                    console.log(response.razorpay_payment_id);
-                    console.log(response.razorpay_order_id);
-                    console.log(response.razorpay_signature);
-                    console.log("Payment successful");
-                    swal("Good job!", "Payment done successful!", "success");
-                  },
-                  prefill: {
-                    name:"", // Provide the customer's name
-                    email:"", // Provide the customer's email
-                    contact:"" // Provide the customer's phone number
-                  },
-                  notes: {
-                    address: "SindhuKonkan"
-                  },
-                  theme: {
-                    color: "#3399cc"
-                  }
-                };
+  let amountEntered = parseFloat(document.getElementById("totalAmt").innerText);
+  let username = document.getElementById("username").value;
+  let endpoint = "/admin/payment_order/";
 
-                var rzp1 = new Razorpay(options);
-                rzp1.on("payment.failed",function(response) {
-                    console.log(response.error.code)
-                    console.log(response.error.description)
-                    console.log(response.error.source)
-                    console.log(response.error.step)
-                    console.log(response.error.reason)
-                    console.log(response.error.metadata.order_id)
-                    console.log(response.error.metadata.payment_id)
+  // Send amount to backend to create Razorpay order
+  axios.post(endpoint, amountEntered)
+    .then(function (response) {
+      if (response.status === 200) {
+        let options = {
+          key: 'rzp_live_VTbX2CR6tMQPqz',
+          amount: response.data.amount,
+          currency: 'INR',
+          name: 'SindhuKonkan',
+          description: 'Payment',
+          image: '/admin_assest/img/organic_food_logo.jpg',
+          order_id: response.data.id,
+          handler: function (razorpayResponse) {
+            console.log("Payment successful");
 
-                })
-                  rzp1.open();
-
-
-              }
+            // Send confirmation and update stock
+            axios.post("/admin/confirm_payment/", {
+              razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+              razorpay_order_id: razorpayResponse.razorpay_order_id,
+              razorpay_signature: razorpayResponse.razorpay_signature
             })
-            .catch(function(error) {
-              console.error(error);
+            .then(function (stockResponse) {
+              console.log("Stock update:", stockResponse.data);
+              swal("Good job!", "Payment and stock updated successfully!", "success");
+
+              // ✅ Enable print button after success
+              printBtn.classList.remove("disabled");
+              printBtn.style.pointerEvents = "auto";
+              printBtn.style.opacity = "1";
+            })
+            .catch(function (err) {
+              console.error("Stock update failed:", err);
+              swal("Error!", "Payment done, but stock update failed!", "error");
             });
+          },
+          prefill: {
+            name: "", // optional
+            email: "", // optional
+            contact: "" // optional
+          },
+          notes: {
+            address: "Innovative Things"
+          },
+          theme: {
+            color: "#3399cc"
+          }
         };
+
+        var rzp1 = new Razorpay(options);
+
+        rzp1.on("payment.failed", function (response) {
+          console.error("Payment failed");
+          console.log(response.error);
+          swal("Failed!", "Payment was not successful. Please try again.", "error");
+        });
+
+        rzp1.open();
+      }
+    })
+    .catch(function (error) {
+      console.error("Error in initiating payment:", error);
+      swal("Error!", "Failed to initiate payment. Try again.", "error");
+    });
+};
+
+
       </script>
 
 </head>
@@ -124,10 +140,11 @@
 
         <div class="page-tools">
             <div class="action-buttons">
-                <a class="btn bg-white btn-light mx-1px text-95" id="print_link" data-title="Print">
+                <a class="btn bg-white btn-light mx-1px text-95 disabled" id="print_link" data-title="Print">
                     <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
                     Print
                 </a>
+
             </div>
         </div>
     </div>
