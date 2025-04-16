@@ -300,7 +300,7 @@ public class AdminController {
         }
         RazorpayClient razorpay = null;
         try {
-            razorpay = new RazorpayClient("rzp_test_8ugSEEjUVgI8ii", "ikXyWe5uh9zLk9LfGiVggTcb");
+            razorpay = new RazorpayClient("rzp_live_VTbX2CR6tMQPqz", "rDABlvV5h9yMQnm1OXjusKO8");
         } catch (RazorpayException e) {
             throw new RuntimeException(e);
         }
