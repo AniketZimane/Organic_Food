@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import com.razorpay.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -258,71 +262,134 @@ public class AdminController {
         model.addAttribute("custName", plased.getCustName());
         return "invoice";
     }
-    @Transactional
-    @ResponseBody
+//    @Transactional
+//    @ResponseBody
+//    @PostMapping("/admin/payment_order/")
+//    public String handlePostRequestOfSeatCount(Model model, @RequestBody String amountEntered) throws RazorpayException {
+//        String arr[] = amountEntered.split("=");
+//        System.out.println(arr[0]);
+//        int amt = Integer.parseInt(arr[0]);
+//        String userId=(String)session.getAttribute("key");
+//        String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
+//        String[] productsNamesArray = productNames.split(",");
+//        String message="work in progress!";
+//
+//        for (String i:productsNamesArray) {
+//            System.out.println("Product id:-"+ productRepo.findProductIdsByName(i));
+//            Integer productId=productRepo.findProductIdsByName(i);
+//            Product product=productRepo.getReferenceById(productId);
+//            Integer toProcureQty=tempOrderRepo.findProductQtyByUserId(userId,productId);
+//            Integer actualStock=productRepo.findActualStockById(productId);
+//            if(actualStock>=toProcureQty)
+//            {
+//                Integer remainStock=actualStock-toProcureQty;
+//                Product data=new Product(productId,product.getCategory(),product.getName(),product.getTitle(),product.getMnf_date(),product.getExp_date(),product.getUnit(),product.getPrize(),product.getDiscount_YN(),product.getDiscount(),remainStock,product.getExtension(),product.getBrief_info(),product.getProd_name(),product.getProd_add(),product.getProd_mob_number(),product.getSystemDateTime());
+//                productRepo.save(data);
+//                List<ProductStock> productStockList=productStockRepo.findProductStockByProductId(productId);
+//                for (ProductStock productStock : productStockList) {
+//                    Integer openingBal = productStock.getClosingQty();
+//                    Integer returnQty = productStock.getReturnQty();
+//                    Integer issueQty = productHelper.getProductQty();
+//                    Integer closingQty = actualStock-toProcureQty;
+//                    LocalDateTime systemDate = LocalDateTime.now();
+//                    ProductStock productStockUpdated = new ProductStock(productStock.getId(),productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+//                    productStockRepo.save(productStockUpdated);
+//                    tempOrderRepo.deleteByUserIdAndProductId(userId,productId);
+//                }
+//            }
+//            else{
+//                message="Store is not available try after some time";
+//            }
+//
+//        }
+//        RazorpayClient razorpay = null;
+//        try {
+//            razorpay = new RazorpayClient("rzp_live_VTbX2CR6tMQPqz", "rDABlvV5h9yMQnm1OXjusKO8");
+//        } catch (RazorpayException e) {
+//            throw new RuntimeException(e);
+//        }
+//        JSONObject option = new JSONObject();
+//        option.put("amount", amt * 100); // amount in the smallest currency unit
+//        option.put("currency", "INR");
+//        option.put("receipt", "order_rcptid_11");
+//        Order order = razorpay.orders.create(option);
+//        System.out.println("Order:" + order);
+//        Integer amtval = option.getInt("amount");
+//        String trncId = order.get("id");
+//        String currency = option.getString("currency");
+//
+//        System.out.println(amtval);
+//        session.invalidate();
+//        message=order.toString();
+//        return message;
+//    }
+
     @PostMapping("/admin/payment_order/")
-    public String handlePostRequestOfSeatCount(Model model, @RequestBody String amountEntered) throws RazorpayException {
-        String arr[] = amountEntered.split("=");
-        System.out.println(arr[0]);
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> createRazorpayOrder(@RequestBody String amountEntered) throws RazorpayException {
+        String[] arr = amountEntered.split("=");
         float amt = Float.parseFloat(arr[0]);
-        String userId=(String)session.getAttribute("key");
-        String productNames=orderPlacedRepo.findProductsNamesByUserName(userId);
-        String[] productsNamesArray = productNames.split(",");
-        String message="work in progress!";
 
-        for (String i:productsNamesArray) {
-            System.out.println("Product id:-"+ productRepo.findProductIdsByName(i));
-            Integer productId=productRepo.findProductIdsByName(i);
-            Product product=productRepo.getReferenceById(productId);
-            Integer toProcureQty=tempOrderRepo.findProductQtyByUserId(userId,productId);
-            Integer actualStock=productRepo.findActualStockById(productId);
-            if(actualStock>=toProcureQty)
-            {
-                Integer remainStock=actualStock-toProcureQty;
-                Product data=new Product(productId,product.getCategory(),product.getName(),product.getTitle(),product.getMnf_date(),product.getExp_date(),product.getUnit(),product.getPrize(),product.getDiscount_YN(),product.getDiscount(),remainStock,product.getExtension(),product.getBrief_info(),product.getProd_name(),product.getProd_add(),product.getProd_mob_number(),product.getSystemDateTime());
-                productRepo.save(data);
-                List<ProductStock> productStockList=productStockRepo.findProductStockByProductId(productId);
-                for (ProductStock productStock : productStockList) {
-                    Integer openingBal = productStock.getClosingQty();
-                    Integer returnQty = productStock.getReturnQty();
-                    Integer issueQty = productHelper.getProductQty();
-                    Integer closingQty = actualStock-toProcureQty;
-                    LocalDateTime systemDate = LocalDateTime.now();
-                    ProductStock productStockUpdated = new ProductStock(productStock.getId(),productId, openingBal, returnQty, issueQty, closingQty, systemDate);
-                    productStockRepo.save(productStockUpdated);
-                    tempOrderRepo.deleteByUserIdAndProductId(userId,productId);
-                }
-            }
-            else{
-                message="Store is not available try after some time";
-            }
+        RazorpayClient razorpay = new RazorpayClient("rzp_live_VTbX2CR6tMQPqz", "rDABlvV5h9yMQnm1OXjusKO8");
+        JSONObject options = new JSONObject();
+        options.put("amount", amt * 100);
+        options.put("currency", "INR");
+        options.put("receipt", "order_rcptid_11");
+        Order order = razorpay.orders.create(options);
 
-        }
-        RazorpayClient razorpay = null;
-        try {
-            razorpay = new RazorpayClient("rzp_live_VTbX2CR6tMQPqz", "rDABlvV5h9yMQnm1OXjusKO8");
-        } catch (RazorpayException e) {
-            throw new RuntimeException(e);
-        }
-        JSONObject option = new JSONObject();
-        option.put("amount", amt * 100); // amount in the smallest currency unit
-        option.put("currency", "INR");
-        option.put("receipt", "order_rcptid_11");
-        Order order = razorpay.orders.create(option);
-        System.out.println("Order:" + order);
-        Integer amtval = option.getInt("amount");
-        String trncId = order.get("id");
-        String currency = option.getString("currency");
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("id", order.get("id"));
+        responseData.put("amount", order.get("amount"));
 
-        System.out.println(amtval);
-        session.invalidate();
-        message=order.toString();
-        return message;
+        return ResponseEntity.ok(responseData);
     }
+
+    @Transactional
+    @PostMapping("/admin/confirm_payment/")
+    @ResponseBody
+    public ResponseEntity<String> confirmAndUpdateStock(@RequestBody Map<String, String> paymentData) {
+        String userId = (String) session.getAttribute("key");
+        String productNames = orderPlacedRepo.findProductsNamesByUserName(userId);
+        String[] productsNamesArray = productNames.split(",");
+
+        for (String name : productsNamesArray) {
+            Integer productId = productRepo.findProductIdsByName(name);
+            Product product = productRepo.getReferenceById(productId);
+            Integer toProcureQty = tempOrderRepo.findProductQtyByUserId(userId, productId);
+            Integer actualStock = productRepo.findActualStockById(productId);
+
+            if (actualStock >= toProcureQty) {
+                Integer remainStock = actualStock - toProcureQty;
+                product.setStock(remainStock);
+                productRepo.save(product);
+
+                List<ProductStock> stockList = productStockRepo.findProductStockByProductId(productId);
+                for (ProductStock stock : stockList) {
+                    Integer openingBal = stock.getClosingQty();
+                    Integer returnQty = stock.getReturnQty();
+                    Integer issueQty = productHelper.getProductQty();
+                    Integer closingQty = remainStock;
+                    LocalDateTime systemDate = LocalDateTime.now();
+
+                    ProductStock updatedStock = new ProductStock(stock.getId(), productId, openingBal, returnQty, issueQty, closingQty, systemDate);
+                    productStockRepo.save(updatedStock);
+                }
+
+                tempOrderRepo.deleteByUserIdAndProductId(userId, productId);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient stock for: " + name);
+            }
+        }
+
+        return ResponseEntity.ok("Stock updated successfully after payment.");
+    }
+
 
     @PostMapping("/new/user/registration/")
     public String addUser(Model model, Registration registration) {
         Registration registrationList = registrationRepo.getByEmail(registration.getEmail());
+
+        System.out.println(registrationList);
         if (registrationList == null) {
             tCode code= tCodeRepo.getReferenceById(1);
             System.out.println(code);
