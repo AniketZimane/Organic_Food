@@ -288,8 +288,19 @@ public class matercontroller {
         return "SubscriptionPlan";
     }
     @GetMapping("/get/myorder/")
-    public String getMyOrder()
+    public String getMyOrder(Model model)
     {
+        List<OrderPlased> orderPlasedList=orderPlacedRepo.findByCustName(session.getAttribute("key").toString());
+        model.addAttribute("MyOrder",orderPlasedList);
+        for (OrderPlased data:orderPlasedList) {
+            model.addAttribute("oderId",data.getId());
+            model.addAttribute("prodName",data.getBuyProductName());
+            model.addAttribute("add",data.getHomeAddress());
+            model.addAttribute("qty",data.getTotalQty());
+            model.addAttribute("amt",data.getTotalAmt());
+            model.addAttribute("mobile",data.getMobNO());
+
+        }
         return "MyOrder";
     }
 
