@@ -13,4 +13,6 @@ public interface OrderPlacedRepo extends JpaRepository<OrderPlased,Integer> {
     String findInvoiceIdByName(@Param("custName") String custName);
     @Query("SELECT p.buyProductName FROM OrderPlased p WHERE p.custName = :custName order by systemDate desc limit 1")
     String findProductsNamesByUserName(@Param("custName") String custName);
+    List<OrderPlased> findByCustName(String custName);
+
 }
