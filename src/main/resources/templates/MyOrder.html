@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders | Organic Farms</title>
+    <title>My Orders | SindhuKonkan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -32,12 +32,12 @@
         <!-- Order Header -->
         <div class="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
             <div>
-                <h2 class="font-bold text-lg">Order #OF-2023-1254</h2>
-                <p class="text-sm text-gray-500">Placed on 15 Nov 2023 at 10:30 AM</p>
+                <h2 class="font-bold text-lg" th:text="${oderId}">Order #OF-2023-1254</h2>
+                <p class="text-sm text-gray-500">Update you shortly</p>
             </div>
-            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                In Transit
-            </div>
+<!--            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">-->
+<!--                In Transit-->
+<!--            </div>-->
         </div>
 
         <!-- Order Items -->
@@ -51,69 +51,23 @@
                 </div>
                 <div class="flex-grow">
                     <div class="flex justify-between">
-                        <h3 class="font-medium text-lg">Organic Tomatoes</h3>
-                        <span class="font-bold">₹120/kg</span>
+                        <h3 class="font-medium text-lg" th:text="${prodName}">Organic Tomatoes</h3>
+                        <span class="font-bold" th:Text="${amt}">₹120/kg</span>
                     </div>
-                    <p class="text-gray-600 text-sm mb-2">From: Rajesh Organic Farm, Sindhudurg</p>
+                    <p class="text-gray-600 text-sm mb-2">From: SindhuKonkan</p>
+                    <p class="text-gray-600 text-sm mb-2" th:text="${add}">To: SindhuKonkan</p>
                     <div class="flex items-center text-sm text-gray-500 mb-2">
                         <i class="fas fa-box-open mr-2"></i>
-                        <span>Quantity: 5 kg</span>
+                        <span th:text="'Quantity: '+${qty}">Quantity: 5 kg</span>
                     </div>
                     <div class="flex items-center text-sm text-gray-500">
                         <i class="fas fa-clock mr-2"></i>
-                        <span>Estimated delivery: Today by 4 PM</span>
+                        <span>Estimated delivery: Update Shortly</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 2 -->
-            <div class="p-4 flex flex-col md:flex-row">
-                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-4">
-                    <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
-                         alt="Organic Bananas"
-                         class="w-24 h-24 rounded-lg object-cover">
-                </div>
-                <div class="flex-grow">
-                    <div class="flex justify-between">
-                        <h3 class="font-medium text-lg">Organic Bananas (Robusta)</h3>
-                        <span class="font-bold">₹60/dozen</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-2">From: Konkan Banana Co-op, Ratnagiri</p>
-                    <div class="flex items-center text-sm text-gray-500 mb-2">
-                        <i class="fas fa-box-open mr-2"></i>
-                        <span>Quantity: 2 dozen</span>
-                    </div>
-                    <div class="flex items-center text-sm text-gray-500">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Estimated delivery: Today by 4 PM</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Item 3 -->
-            <div class="p-4 flex flex-col md:flex-row">
-                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-4">
-                    <img src="https://images.unsplash.com/photo-1566842600175-97dca3c5ad38?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80"
-                         alt="Organic Rice"
-                         class="w-24 h-24 rounded-lg object-cover">
-                </div>
-                <div class="flex-grow">
-                    <div class="flex justify-between">
-                        <h3 class="font-medium text-lg">Organic Red Rice (Indrayani)</h3>
-                        <span class="font-bold">₹95/kg</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-2">From: Sahyadri Organic Collective, Kolhapur</p>
-                    <div class="flex items-center text-sm text-gray-500 mb-2">
-                        <i class="fas fa-box-open mr-2"></i>
-                        <span>Quantity: 10 kg</span>
-                    </div>
-                    <div class="flex items-center text-sm text-gray-500">
-                        <i class="fas fa-clock mr-2"></i>
-                        <span>Estimated delivery: Tomorrow by 12 PM</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Order Summary -->
         <div class="p-4 border-t border-gray-200 bg-gray-50">
@@ -121,20 +75,14 @@
                 <div>
                     <div class="flex items-center text-sm text-gray-600">
                         <i class="fas fa-truck mr-2"></i>
-                        <span>Delivery to: Hotel Green Leaf, Malvan</span>
+                        <span th:text="'Delivery to:'+${add}">Delivery to: Hotel Green Leaf, Malvan</span>
                     </div>
                     <div class="flex items-center text-sm text-gray-600 mt-1">
                         <i class="fas fa-phone mr-2"></i>
-                        <span>Contact: +91 9876543210</span>
+                        <span th:text="'Contact:'+${mobile}">Contact: +91 9876543210</span>
                     </div>
                 </div>
-                <div class="text-right">
-                    <p class="text-sm text-gray-600">Total Items: 3</p>
-                    <p class="font-bold text-lg">₹1,310</p>
-                    <button class="mt-2 text-sm text-green-600 hover:text-green-800 font-medium">
-                        <i class="fas fa-file-invoice mr-1"></i>View Invoice
-                    </button>
-                </div>
+
             </div>
         </div>
 
@@ -152,10 +100,7 @@
     <!-- Previous Order (Collapsed) -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
         <div class="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
-            <div>
-                <h2 class="font-bold text-lg">Order #OF-2023-1189</h2>
-                <p class="text-sm text-gray-500">Delivered on 10 Nov 2023</p>
-            </div>
+            
             <div class="flex items-center">
                 <div class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mr-3">
                     Delivered
