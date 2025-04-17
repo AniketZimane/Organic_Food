@@ -49,6 +49,8 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th class="text-center">Order no</th>
+                                        <th class="text-center">Customer Name</th>
+                                        <th class="text-center">Product Name</th>
                                         <th class="text-center">Pack</th>
                                         <th class="text-center">Dispatched</th>
                                         <th class="text-center">Delivered</th>
@@ -58,6 +60,8 @@
                                 <tbody class="text-center">
                                     <tr th:each="orders:${order}">
                                         <td th:text="${orders.id}">#1001</td>
+                                        <td th:text="${orders.custName}">#1001</td>
+                                        <td th:text="${orders.buyProductName}">#1001</td>
                                         <td><select class="border rounded-pill" style="height: 40px;width: 140px;text-align: justify;padding-left: 10px;">
                                                 <option value="1">Done</option>
                                                 <option value="14">Not Done Yet</option>
