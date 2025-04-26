@@ -20,6 +20,10 @@ public class OrderPlased {
     String homeOfficeYN;
     String homeAddress;
     String officeAddress;
+    String packed;
+    String dispatch;
+    String outForDelivery;
+    String delivered;
     @CreationTimestamp
     LocalDateTime systemDate;
 
@@ -37,6 +41,24 @@ public class OrderPlased {
         this.homeOfficeYN = homeOfficeYN;
         this.homeAddress = homeAddress;
         this.officeAddress = officeAddress;
+        this.systemDate = systemDate;
+    }
+
+    public OrderPlased(Integer id, String custName, String buyProductName, String mobNO, Integer totalAmt, Integer totalQty, Integer paymentType, String homeOfficeYN, String homeAddress, String officeAddress, String packed, String dispatch, String outForDelivery, String delivered, LocalDateTime systemDate) {
+        this.id = id;
+        this.custName = custName;
+        this.buyProductName = buyProductName;
+        this.mobNO = mobNO;
+        this.totalAmt = totalAmt;
+        this.totalQty = totalQty;
+        this.paymentType = paymentType;
+        this.homeOfficeYN = homeOfficeYN;
+        this.homeAddress = homeAddress;
+        this.officeAddress = officeAddress;
+        this.packed = packed;
+        this.dispatch = dispatch;
+        this.outForDelivery = outForDelivery;
+        this.delivered = delivered;
         this.systemDate = systemDate;
     }
 
@@ -128,6 +150,38 @@ public class OrderPlased {
         this.systemDate = systemDate;
     }
 
+    public String getPacked() {
+        return packed;
+    }
+
+    public void setPacked(String packed) {
+        this.packed = packed;
+    }
+
+    public String getDispatch() {
+        return dispatch;
+    }
+
+    public void setDispatch(String dispatch) {
+        this.dispatch = dispatch;
+    }
+
+    public String getOutForDelivery() {
+        return outForDelivery;
+    }
+
+    public void setOutForDelivery(String outForDelivery) {
+        this.outForDelivery = outForDelivery;
+    }
+
+    public String getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(String delivered) {
+        this.delivered = delivered;
+    }
+
     @Override
     public String toString() {
         return "OrderPlased{" +
@@ -141,6 +195,10 @@ public class OrderPlased {
                 ", homeOfficeYN='" + homeOfficeYN + '\'' +
                 ", homeAddress='" + homeAddress + '\'' +
                 ", officeAddress='" + officeAddress + '\'' +
+                ", packed='" + packed + '\'' +
+                ", dispatch='" + dispatch + '\'' +
+                ", outForDelivery='" + outForDelivery + '\'' +
+                ", delivered='" + delivered + '\'' +
                 ", systemDate=" + systemDate +
                 '}';
     }
