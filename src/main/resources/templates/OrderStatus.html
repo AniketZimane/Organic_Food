@@ -4,27 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>SindhuKonkan|Farmer Dashboard</title>
+    <title>krushiconnect |Farmer Dashboard</title>
     <link rel="stylesheet" href="/assetsFarmar/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;display=swap">
     <link rel="stylesheet" href="/assetsFarmar/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="/assetsFarmar/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assetsFarmar/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">-->
     <link rel="stylesheet" href="/assetsFarmar/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
     <link rel="stylesheet" href="/assetsFarmar/css/select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/user_assest/js/orderapi.js"></script>
+
+
 </head>
 
 <body style="background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url('/assetsFarmar/img/bg.jpg');">
-    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">A Free Bootstrap 5 Business Theme&nbsp;</span><span class="site-heading-lower">Business Casual</span></h1>
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">Agriconnect Dashboard&nbsp;</span><span class="site-heading-lower">Organic Food</span></h1>
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark py-lg-4" id="mainNav">
         <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navbarResponsive"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="/farmer/dashboard/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/order/status/">My orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
 <!--                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>-->
 <!--                    <li class="nav-item"><a class="nav-link" href="store.html">Store</a></li>-->
                 </ul>
@@ -53,31 +59,53 @@
                                         <th class="text-center">Product Name</th>
                                         <th class="text-center">Pack</th>
                                         <th class="text-center">Dispatched</th>
+                                        <th class="text-center">Out For Delivery</th>
                                         <th class="text-center">Delivered</th>
                                         <th class="text-center filter-false sorter-false">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
-                                    <tr th:each="orders:${order}">
-                                        <td th:text="${orders.id}">#1001</td>
-                                        <td th:text="${orders.custName}">#1001</td>
-                                        <td th:text="${orders.buyProductName}">#1001</td>
-                                        <td><select class="border rounded-pill" style="height: 40px;width: 140px;text-align: justify;padding-left: 10px;">
-                                                <option value="1">Done</option>
-                                                <option value="14">Not Done Yet</option>
-                                            </select></td>
-                                        <td><select class="border rounded-pill" style="height: 40px;width: 140px;text-align: justify;padding-left: 10px;">
-                                                <option value="1">DONE</option>
-                                                <option value="14">Not Done Yet</option>
-                                            </select></td>
-                                        <td><select class="border rounded-pill" style="height: 40px;width: 140px;text-align: justify;padding-left: 10px;">
-                                                <option value="1" selected="">Done</option>
-                                                <option value="0">Not Done Yet</option>
-                                            </select></td>
-                                        <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"><i class="far fa-eye"></i></a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a></td>
-                                    </tr>
-                                    <tr></tr>
+                                <tr th:each="orders : ${order}">
+                                    <td th:text="${orders.id}">#1001</td>
+                                    <td th:text="${orders.custName}">Customer Name</td>
+                                    <td th:text="${orders.buyProductName}">Product Name</td>
+
+                                    <td>
+                                        <select th:id="'packed-' + ${orders.id}">
+                                            <option value="y" th:selected="${orders.packed == 'y'}">Done</option>
+                                            <option value="n" th:selected="${orders.packed != 'y'}">Not Done Yet</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <select th:id="'dispatch-' + ${orders.id}">
+                                            <option value="y" th:selected="${orders.dispatch == 'y'}">Done</option>
+                                            <option value="n" th:selected="${orders.dispatch != 'y'}">Not Done Yet</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <select th:id="'outForDelivery-' + ${orders.id}">
+                                            <option value="y" th:selected="${orders.outForDelivery == 'y'}">Done</option>
+                                            <option value="n" th:selected="${orders.outForDelivery != 'y'}">Not Done Yet</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <select th:id="'delivered-' + ${orders.id}">
+                                            <option value="y" th:selected="${orders.delivered == 'y'}">Done</option>
+                                            <option value="n" th:selected="${orders.delivered != 'y'}">Not Done Yet</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <button class="btn btn-success" th:attr="data-id=${orders.id}" onclick="saveOrder(this)">
+                                            Save
+                                        </button>
+                                    </td>
+                                </tr>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -88,15 +116,15 @@
     </section>
     <footer class="text-center footer text-faded py-5">
         <div class="container">
-            <p class="m-0 small">Copyright&nbsp;© SindhuKonkan 2025</p>
+            <p class="m-0 small">Copyright&nbsp;© krushiconnect 2025</p>
         </div>
     </footer>
     <script src="/assetsFarmar/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assetsFarmar/js/current-day.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
     <script src="/assetsFarmar/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
     <script src="/assetsFarmar/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
 </body>
